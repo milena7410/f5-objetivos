@@ -23,7 +23,7 @@ const App = () => {
           }
         />
         <ScrollView>
-          {todos.list.slice(-10).map((todo) => (
+          {todos.list.map((todo) => (
             <ThemedText key={todo.title}>{JSON.stringify(todo)}</ThemedText>
           ))}
         </ScrollView>
