@@ -3,9 +3,23 @@ import { persistStore } from "redux-persist";
 
 import persistReducer from "./persistReducer";
 import { rootReducer } from "./reducers";
+import { tasksGatewayHttp } from "../infra/TaskGatewayHttp";
+import { api } from "../infra/adapters/httpClient";
+import { TaskGateway } from "../infra/TaskGateway";
+
+export type ThunkAPIExtras = { taskGateway: TaskGateway };
+
+export type AppAsyncThunkConfig = {
+  state: RootState;
+  extra?: ThunkAPIExtras;
+};
 
 export const store = configureStore({
   reducer: persistReducer(rootReducer),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: { extraArgument: { taskGateway: tasksGatewayHttp(api) } },
+    }),
   enhancers: (getDefaultEnhancers) =>
     console.tron?.createEnhancer
       ? getDefaultEnhancers().concat(console.tron.createEnhancer())
