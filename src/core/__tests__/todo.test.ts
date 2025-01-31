@@ -4,6 +4,7 @@ import { TaskGatewayInMemory } from "../infra/TaskGatewayInMemory";
 import { createTask } from "../application/use-cases/createTask";
 import { getTask } from "../application/use-cases/getTask";
 import { getTodoList } from "../application/use-cases/getTodoList";
+import { toJSON } from "../domain/Task";
 
 describe("Todo Gateway", () => {
   let taskGateway: TaskGateway;
@@ -12,12 +13,6 @@ describe("Todo Gateway", () => {
   });
 
   it("should get all todos", async () => {
-    const withoutIde = {
-      userId: 10,
-      title:
-        "temporibus atque distinctio omnis eius impedit tempore molestias pariatur",
-      completed: true,
-    };
     const list = await getTodoList(taskGateway);
     expect(list.length).toBeGreaterThan(0);
   });
@@ -46,5 +41,6 @@ describe("Todo Gateway", () => {
     const task = await getTask(taskGateway, newTask.id);
     expect(newTask).toHaveProperty("id");
     expect(newTask.id).toBe(task.id);
+    expect(JSON.parse(toJSON(task))).not.toHaveProperty("id");
   });
 });

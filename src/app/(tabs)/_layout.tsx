@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import React from "react";
+import * as React from "react";
 import { Platform } from "react-native";
 
 import { HapticTab } from "~/components/HapticTab";
@@ -33,6 +33,15 @@ export default function TabLayout() {
           title: "Home",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="house.fill" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="example"
+        options={{
+          title: "Exemplo",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="chevron.left" color={color} />
           ),
         }}
       />

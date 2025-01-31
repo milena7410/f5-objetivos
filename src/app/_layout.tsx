@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import * as React from "react";
 import {
   DarkTheme,
   DefaultTheme,
@@ -27,7 +27,7 @@ const RootLayout = () => {
     SpaceMono: require("~/assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }

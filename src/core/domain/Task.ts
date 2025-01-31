@@ -9,8 +9,9 @@ export interface Task extends Required<TaskDTO> {}
 
 export const taskBuilder = (task: TaskDTO): Task => {
   const generateId = () => {
-    const crypto = require("crypto");
-    return crypto.randomBytes(16).toString("hex");
+    const Crypto = require("expo-crypto");
+    const random = Crypto.getRandomBytes(8).join("");
+    return random;
   };
 
   return {

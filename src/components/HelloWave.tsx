@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import * as React from "react";
 import { StyleSheet } from "react-native";
 import Animated, {
   useSharedValue,
@@ -13,7 +13,7 @@ import { ThemedText } from "~/components/ThemedText";
 export function HelloWave() {
   const rotationAnimation = useSharedValue(0);
 
-  useEffect(() => {
+  React.useEffect(() => {
     rotationAnimation.value = withRepeat(
       withSequence(
         withTiming(25, { duration: 150 }),

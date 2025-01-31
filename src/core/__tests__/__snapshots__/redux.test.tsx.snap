@@ -1,9 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Redux TodoList should not render anything if the todo list is empty 1`] = `<View />`;
+exports[`Redux TodoList should not render anything if the todo list is empty 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "green",
+      },
+      undefined,
+    ]
+  }
+/>
+`;
 
 exports[`Redux TodoList should render a list of todos correctly 1`] = `
-<View>
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#fff",
+      },
+      undefined,
+    ]
+  }
+>
   <Text>
     temporibus atque distinctio omnis eius impedit tempore molestias pariatur
   </Text>

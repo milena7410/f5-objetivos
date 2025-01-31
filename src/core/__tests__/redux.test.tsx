@@ -1,58 +1,68 @@
-import { useEffect } from "react";
+import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react-native";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 
-import { useAppSelector } from "../../store/hooks/redux";
-import { useTodos } from "../../store/reducers/todos/actions";
+import { useAppSelector } from "~/store/hooks/redux";
+import { useTodos } from "~/store/reducers/todos/actions";
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
+import { ThemedView } from "~/components/ThemedView";
+import { useColorScheme } from "~/hooks/useColorScheme.web";
 
 const GetTodoListEmpty = () => {
   const { list } = useAppSelector(({ todos }) => todos);
+  const colorScheme = useColorScheme();
   return (
-    <View>
-      {list.map((todo) => (
-        <Text key={todo.id}>{todo.title}</Text>
-      ))}
-    </View>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemedView lightColor="green" darkColor="gray">
+        {list.map((todo) => (
+          <Text key={todo.id}>{todo.title}</Text>
+        ))}
+      </ThemedView>
+    </ThemeProvider>
   );
 };
 
 const GetTodoList = () => {
   const { list } = useAppSelector(({ todos }) => todos);
   const { getTodoList } = useTodos();
-  useEffect(() => {
+  React.useEffect(() => {
     getTodoList();
   }, []);
   return (
-    <View>
+    <ThemedView>
       {list.map((todo) => (
         <Text key={todo.id}>{todo.title}</Text>
       ))}
-    </View>
+    </ThemedView>
   );
 };
 
 const CreateTodo = () => {
   const { list } = useAppSelector(({ todos }) => todos);
   const { addTodo } = useTodos();
-  useEffect(() => {
+  React.useEffect(() => {
     addTodo({ title: "New TODO", userId: 211 });
   }, []);
   return (
-    <View>
+    <ThemedView>
       {list.map((todo) => (
         <Text key={todo.id}>{todo.title}</Text>
       ))}
-    </View>
+    </ThemedView>
   );
 };
 
 const NotFound = ({ id }: { id: number }) => {
   const { todos, getTodo } = useTodos();
-  useEffect(() => {
+  React.useEffect(() => {
     getTodo(id);
   }, [id]);
-  return <View>{todos.error && <Text>{todos.error}</Text>}</View>;
+  return <ThemedView>{todos.error && <Text>{todos.error}</Text>}</ThemedView>;
 };
 
 describe("Redux TodoList", () => {

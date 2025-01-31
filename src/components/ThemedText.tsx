@@ -16,21 +16,16 @@ export function ThemedText({
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const styleMapping = {
+    default: styles.default,
+    title: styles.title,
+    defaultSemiBold: styles.defaultSemiBold,
+    subtitle: styles.subtitle,
+    link: styles.link,
+  };
 
-  return (
-    <Text
-      style={[
-        { color },
-        type === "default" ? styles.default : undefined,
-        type === "title" ? styles.title : undefined,
-        type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
-        type === "subtitle" ? styles.subtitle : undefined,
-        type === "link" ? styles.link : undefined,
-        style,
-      ]}
-      {...rest}
-    />
-  );
+  const selectedStyle = styleMapping[type];
+  return <Text style={[{ color }, selectedStyle, style]} {...rest} />;
 }
 
 const styles = StyleSheet.create({

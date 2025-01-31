@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement } from "react";
+import * as React from "react";
 import { StyleSheet } from "react-native";
 import Animated, {
   interpolate,
@@ -13,8 +13,8 @@ import { useColorScheme } from "~/hooks/useColorScheme";
 
 const HEADER_HEIGHT = 250;
 
-type Props = PropsWithChildren<{
-  headerImage: ReactElement;
+type Props = React.PropsWithChildren<{
+  headerImage: React.ReactElement;
   headerBackgroundColor: { dark: string; light: string };
 }>;
 

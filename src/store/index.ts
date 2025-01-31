@@ -1,5 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore } from "redux-persist";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 import persistReducer from "./persistReducer";
 import { rootReducer } from "./reducers";
@@ -19,6 +27,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: { extraArgument: { taskGateway: tasksGatewayHttp(api) } },
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
     }),
   enhancers: (getDefaultEnhancers) =>
     console.tron?.createEnhancer
