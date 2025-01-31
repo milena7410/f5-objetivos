@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { render, screen, waitFor } from "@testing-library/react-native";
 import { Text, View } from "react-native";
 
-import { useAppSelector } from "../store/hooks/redux";
-import { useTodos } from "../store/reducers/todos/actions";
-import { FakeReduxProvider } from "../mock/FakeProvider";
+import { useAppSelector } from "../../store/hooks/redux";
+import { useTodos } from "../../store/reducers/todos/actions";
+import { FakeReduxProvider } from "../__mocks__/FakeProvider";
 
 const GetTodoListEmpty = () => {
   const { list } = useAppSelector(({ todos }) => todos);
@@ -47,6 +47,14 @@ const CreateTodo = () => {
   );
 };
 
+const NotFound = ({ id }: { id: number }) => {
+  const { todos, getTodo } = useTodos();
+  useEffect(() => {
+    getTodo(id);
+  }, [id]);
+  return <View>{todos.error && <Text>{todos.error}</Text>}</View>;
+};
+
 describe("Redux TodoList", () => {
   const FIST_TITLE = "ut quas possimus exercitationem sint voluptates";
   it("should render a list of todos correctly", async () => {
@@ -86,14 +94,15 @@ describe("Redux TodoList", () => {
       expect(screen.getByText("New TODO")).toBeTruthy();
     });
   });
-  it("should delete a new Task ", async () => {
+
+  it("should throw error if not exists", async () => {
     render(
       <FakeReduxProvider>
-        <CreateTodo />
+        <NotFound id={0} />
       </FakeReduxProvider>
     );
     await waitFor(() => {
-      expect(screen.getByText("New TODO")).toBeTruthy();
+      expect(screen.getByText("not found")).toBeTruthy();
     });
   });
 });

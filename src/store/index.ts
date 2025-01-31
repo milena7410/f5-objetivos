@@ -3,9 +3,9 @@ import { persistStore } from "redux-persist";
 
 import persistReducer from "./persistReducer";
 import { rootReducer } from "./reducers";
-import { tasksGatewayHttp } from "../infra/TaskGatewayHttp";
-import { api } from "../infra/adapters/httpClient";
-import { TaskGateway } from "../infra/TaskGateway";
+import { tasksGatewayHttp } from "../core/infra/TaskGatewayHttp";
+import { api } from "../core/infra/adapters/httpClient";
+import { TaskGateway } from "../core/infra/TaskGateway";
 
 export type ThunkAPIExtras = { taskGateway: TaskGateway };
 

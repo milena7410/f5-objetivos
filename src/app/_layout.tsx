@@ -11,7 +11,7 @@ import { StatusBar } from "expo-status-bar";
 import { Provider } from "react-redux";
 import "react-native-reanimated";
 
-import { store } from "~/core/store";
+import { store } from "~/store";
 import { useColorScheme } from "~/hooks/useColorScheme";
 
 if (__DEV__) {

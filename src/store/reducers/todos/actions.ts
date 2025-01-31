@@ -2,7 +2,7 @@ import { useCallback } from "react";
 
 import { TaskDTO } from "~/core/domain/Task";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { addTask, getTasks } from "./thunk";
+import { createTask, getTask, getTasks } from "./thunk";
 
 export const useTodos = () => {
   const todos = useAppSelector(({ todos }) => todos);
@@ -14,8 +14,12 @@ export const useTodos = () => {
   }, []);
 
   const addTodo = useCallback((todo: TaskDTO) => {
-    dispatch(addTask(todo));
+    dispatch(createTask(todo));
   }, []);
 
-  return { todos, getTodoList, addTodo };
+  const getTodo = useCallback((id: number) => {
+    dispatch(getTask(id));
+  }, []);
+
+  return { todos, getTodoList, addTodo, getTodo };
 };

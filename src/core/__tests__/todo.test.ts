@@ -28,7 +28,7 @@ describe("Todo Gateway", () => {
     expect(task.id).toBe(id);
   });
 
-  it("should get error if not exists", async () => {
+  it("should throw error if not exists", async () => {
     const id = 3000;
     const promise = getTask(taskGateway, id);
     await expect(promise).rejects.toMatchObject({

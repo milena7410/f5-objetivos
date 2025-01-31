@@ -1,6 +1,5 @@
-import { createAsyncThunk, Dispatch, GetThunkAPI } from "@reduxjs/toolkit";
-import { createTask } from "~/core/application/use-cases/createTask";
-import { getTodoList } from "~/core/application/use-cases/getTodoList";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import * as useCases from "~/core/application/use-cases/";
 
 import type { TaskDTO } from "~/core/domain/Task";
 import { RootState } from "../..";
@@ -15,17 +14,26 @@ type AppAsyncThunkConfig = {
 
 export const thunk = createAsyncThunk.withTypes<AppAsyncThunkConfig>();
 
+export const getTask = thunk(
+  "@todos/getTasks",
+  async (id: number, { extra }) => {
+    const { taskGateway } = extra as ThunkAPIExtras;
+    const list = useCases.getTask(taskGateway, id);
+    return list;
+  }
+);
+
 export const getTasks = thunk("@todos/getTasks", async (_, { extra }) => {
   const { taskGateway } = extra as ThunkAPIExtras;
-  const list = getTodoList(taskGateway);
+  const list = useCases.getTodoList(taskGateway);
   return list;
 });
 
-export const addTask = thunk(
-  "@todos/addTask",
+export const createTask = thunk(
+  "@todos/createTask",
   async (task: TaskDTO, { extra }) => {
     const { taskGateway } = extra as ThunkAPIExtras;
-    const newTask = createTask(taskGateway, task);
+    const newTask = useCases.createTask(taskGateway, task);
     return newTask;
   }
 );

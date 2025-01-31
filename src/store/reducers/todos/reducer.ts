@@ -25,20 +25,20 @@ const todoSlice = createSlice({
       state.state = "success";
       state.error = "";
     });
-    builder.addCase(thunk.addTask.fulfilled, (state, actions) => {
+    builder.addCase(thunk.createTask.fulfilled, (state, actions) => {
       state.list = [...state.list, actions.payload];
       state.state = "success";
       state.error = "";
     });
     builder.addMatcher(
-      isAnyOf(thunk.getTasks.pending, thunk.addTask.pending),
+      isAnyOf(thunk.getTasks.pending, thunk.createTask.pending),
       (state) => {
         state.state = "error";
         state.error = "";
       }
     );
     builder.addMatcher(
-      isAnyOf(thunk.getTasks.rejected, thunk.addTask.rejected),
+      isAnyOf(thunk.getTasks.rejected, thunk.createTask.rejected),
       (state, actions) => {
         state.state = "error";
         state.error = actions.error.message;

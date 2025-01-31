@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 import {
   Provider,
   TypedUseSelectorHook,
@@ -5,8 +6,7 @@ import {
   useSelector,
 } from "react-redux";
 import { store } from "./fakeStore";
-import { AppDispatch, RootState } from "../store";
-import { PropsWithChildren } from "react";
+import { AppDispatch, RootState } from "../../store";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch;

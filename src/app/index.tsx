@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button, ScrollView, View } from "react-native";
 import { ThemedText } from "~/components/ThemedText";
 import { ThemedView } from "~/components/ThemedView";
-import { useTodos } from "~/core/store/reducers/todos/actions";
+import { useTodos } from "~/store/reducers/todos/actions";
 const App = () => {
   const { addTodo, todos, getTodoList } = useTodos();
   useEffect(() => {
