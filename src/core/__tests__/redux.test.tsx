@@ -7,19 +7,20 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 
-import { useAppSelector } from "~/store/hooks/redux";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
 import { ThemedView } from "~/components/ThemedView";
 import { useColorScheme } from "~/hooks/useColorScheme.web";
+import { TODO_LIST_MOCK } from "../infra/TaskGatewayInMemory";
+import { getTasks } from "~/store/reducers/todos/thunk";
 
 const GetTodoListEmpty = () => {
-  const { list } = useAppSelector(({ todos }) => todos);
+  const { todos } = useTodos();
   const colorScheme = useColorScheme();
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <ThemedView lightColor="green" darkColor="gray">
-        {list.map((todo) => (
+        {todos.list.map((todo) => (
           <Text key={todo.id}>{todo.title}</Text>
         ))}
       </ThemedView>
@@ -28,14 +29,13 @@ const GetTodoListEmpty = () => {
 };
 
 const GetTodoList = () => {
-  const { list } = useAppSelector(({ todos }) => todos);
-  const { getTodoList } = useTodos();
+  const { getTodoList, todos } = useTodos();
   React.useEffect(() => {
     getTodoList();
   }, []);
   return (
     <ThemedView>
-      {list.map((todo) => (
+      {todos.list.map((todo) => (
         <Text key={todo.id}>{todo.title}</Text>
       ))}
     </ThemedView>
@@ -43,14 +43,13 @@ const GetTodoList = () => {
 };
 
 const CreateTodo = () => {
-  const { list } = useAppSelector(({ todos }) => todos);
-  const { addTodo } = useTodos();
+  const { addTodo, todos } = useTodos();
   React.useEffect(() => {
     addTodo({ title: "New TODO", userId: 211 });
   }, []);
   return (
     <ThemedView>
-      {list.map((todo) => (
+      {todos.list.map((todo) => (
         <Text key={todo.id}>{todo.title}</Text>
       ))}
     </ThemedView>
@@ -62,11 +61,32 @@ const NotFound = ({ id }: { id: number }) => {
   React.useEffect(() => {
     getTodo(id);
   }, [id]);
-  return <ThemedView>{todos.error && <Text>{todos.error}</Text>}</ThemedView>;
+  return <ThemedView>{!!todos.error && <Text>{todos.error}</Text>}</ThemedView>;
+};
+
+const DeleteTask = ({ id }: { id: number }) => {
+  const { todos, deleteTask, getTodoList } = useTodos();
+  const first = React.useRef(true);
+  React.useEffect(() => {
+    getTodoList().finally(() =>
+      deleteTask(id)
+        .unwrap()
+        .catch(() => {})
+    );
+  }, [id]);
+
+  return (
+    <ThemedView>
+      {todos.list.map((todo) => (
+        <Text key={todo.id}>{todo.title}</Text>
+      ))}
+      {!!todos.error && <Text>{todos.error}</Text>}
+    </ThemedView>
+  );
 };
 
 describe("Redux TodoList", () => {
-  const FIST_TITLE = "ut quas possimus exercitationem sint voluptates";
+  const FIRST_TASK = TODO_LIST_MOCK[0];
   it("should render a list of todos correctly", async () => {
     render(
       <FakeReduxProvider>
@@ -79,7 +99,7 @@ describe("Redux TodoList", () => {
           "temporibus atque distinctio omnis eius impedit tempore molestias pariatur"
         )
       ).toBeTruthy();
-      expect(screen.getByText(FIST_TITLE)).toBeTruthy();
+      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
       expect(screen.toJSON()).toMatchSnapshot();
     });
   });
@@ -94,7 +114,7 @@ describe("Redux TodoList", () => {
     expect(queryByRole("text")).toBeFalsy();
   });
 
-  it("should create a new Task ", async () => {
+  it("should create a new Task and render", async () => {
     render(
       <FakeReduxProvider>
         <CreateTodo />
@@ -105,7 +125,7 @@ describe("Redux TodoList", () => {
     });
   });
 
-  it("should throw error if not exists", async () => {
+  it("should throw error if not exists and render error label", async () => {
     render(
       <FakeReduxProvider>
         <NotFound id={0} />
@@ -113,6 +133,31 @@ describe("Redux TodoList", () => {
     );
     await waitFor(() => {
       expect(screen.getByText("not found")).toBeTruthy();
+    });
+  });
+
+  it("should throw error if try delete task not exists", async () => {
+    render(
+      <FakeReduxProvider>
+        <DeleteTask id={0} />
+      </FakeReduxProvider>
+    );
+    await waitFor(() => {
+      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+      expect(screen.getByText("not found")).toBeTruthy();
+    });
+  });
+
+  it("should delete task", async () => {
+    render(
+      <FakeReduxProvider>
+        <DeleteTask id={FIRST_TASK.id} />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
+      expect(screen.queryByText("not found")).toBeFalsy();
     });
   });
 });

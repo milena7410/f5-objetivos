@@ -37,3 +37,12 @@ export const createTask = thunk(
     return newTask;
   }
 );
+
+export const deleteTask = thunk(
+  "@todos/deleteTask",
+  async (id: number, { extra }) => {
+    const { taskGateway } = extra as ThunkAPIExtras;
+    await useCases.deleteTask(taskGateway, id);
+    return id;
+  }
+);

@@ -30,15 +30,30 @@ const todoSlice = createSlice({
       state.state = "success";
       state.error = "";
     });
+    builder.addCase(thunk.deleteTask.fulfilled, (state, actions) => {
+      const id = actions.payload;
+      const index = state.list.findIndex((task) => id === task.id);
+      state.list.splice(index, 1);
+      state.state = "success";
+      state.error = "";
+    });
     builder.addMatcher(
-      isAnyOf(thunk.getTasks.pending, thunk.createTask.pending),
+      isAnyOf(
+        thunk.getTasks.pending,
+        thunk.createTask.pending,
+        thunk.deleteTask.pending
+      ),
       (state) => {
-        state.state = "error";
+        state.state = "pending";
         state.error = "";
       }
     );
     builder.addMatcher(
-      isAnyOf(thunk.getTasks.rejected, thunk.createTask.rejected),
+      isAnyOf(
+        thunk.getTasks.rejected,
+        thunk.createTask.rejected,
+        thunk.deleteTask.rejected
+      ),
       (state, actions) => {
         state.state = "error";
         state.error = actions.error.message;

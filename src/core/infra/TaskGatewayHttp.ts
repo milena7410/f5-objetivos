@@ -19,5 +19,9 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     return taskBuilder(newTask);
   };
 
-  return { getTasks, createTask, getTask };
+  const deleteTask = async (id: number) => {
+    await httpClient.delete<TaskDTO>(`/todos/${id}`);
+  };
+
+  return { getTasks, createTask, getTask, deleteTask };
 }

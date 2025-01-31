@@ -1,31 +1,33 @@
 import type { TaskGateway } from "../infra/TaskGateway";
 
-import { TaskGatewayInMemory } from "../infra/TaskGatewayInMemory";
-import { createTask } from "../application/use-cases/createTask";
-import { getTask } from "../application/use-cases/getTask";
-import { getTodoList } from "../application/use-cases/getTodoList";
+import {
+  TaskGatewayInMemory,
+  TODO_LIST_MOCK,
+} from "../infra/TaskGatewayInMemory";
+import * as useCases from "../application/use-cases";
 import { toJSON } from "../domain/Task";
 
 describe("Todo Gateway", () => {
+  const FIRST_TASK = TODO_LIST_MOCK[0];
   let taskGateway: TaskGateway;
   beforeEach(() => {
     taskGateway = TaskGatewayInMemory();
   });
 
   it("should get all todos", async () => {
-    const list = await getTodoList(taskGateway);
+    const list = await useCases.getTodoList(taskGateway);
     expect(list.length).toBeGreaterThan(0);
   });
 
   it("should get todo by id", async () => {
-    const id = 199;
-    const task = await getTask(taskGateway, id);
+    const id = FIRST_TASK.id;
+    const task = await useCases.getTask(taskGateway, id);
     expect(task.id).toBe(id);
   });
 
   it("should throw error if not exists", async () => {
     const id = 3000;
-    const promise = getTask(taskGateway, id);
+    const promise = useCases.getTask(taskGateway, id);
     await expect(promise).rejects.toMatchObject({
       message: "not found",
     });
@@ -37,10 +39,19 @@ describe("Todo Gateway", () => {
       title:
         "temporibus atque distinctio omnis eius impedit tempore molestias pariatur",
     };
-    const newTask = await createTask(taskGateway, taskDTO);
-    const task = await getTask(taskGateway, newTask.id);
+    const newTask = await useCases.createTask(taskGateway, taskDTO);
+    const task = await useCases.getTask(taskGateway, newTask.id);
     expect(newTask).toHaveProperty("id");
     expect(newTask.id).toBe(task.id);
     expect(JSON.parse(toJSON(task))).not.toHaveProperty("id");
+  });
+
+  it("should delete a todo by id", async () => {
+    const id = FIRST_TASK.id;
+    await useCases.deleteTask(taskGateway, id);
+    const promise = useCases.getTask(taskGateway, id);
+    await expect(promise).rejects.toMatchObject({
+      message: "not found",
+    });
   });
 });
