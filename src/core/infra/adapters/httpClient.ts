@@ -1,6 +1,7 @@
+import { env } from "~/config/env";
 import { axiosHttpClient } from "./httpClientAxios";
 
 const api = axiosHttpClient({
-  baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: env.API_URL ?? "",
 });
 export { api };
