@@ -1,118 +1,17 @@
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react-native";
-import { Text } from "react-native";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 
-import { useTodos } from "~/store/reducers/todos/actions";
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
-import { ThemedView } from "~/components/ThemedView";
-import { useColorScheme } from "~/hooks/useColorScheme.web";
 import { TODO_LIST_MOCK } from "../infra/TaskGatewayInMemory";
+import {
+  CompleteTask,
+  CreateTodo,
+  DeleteTask,
+  GetTodoList,
+  GetTodoListEmpty,
+  NotFound,
+} from "../__mocks__/FakeApp";
 
-const GetTodoListEmpty = () => {
-  const { todos } = useTodos();
-  const colorScheme = useColorScheme();
-  return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <ThemedView lightColor="green" darkColor="gray">
-        {todos.list.map((todo) => (
-          <Text key={todo.id}>{todo.title}</Text>
-        ))}
-      </ThemedView>
-    </ThemeProvider>
-  );
-};
-
-const GetTodoList = () => {
-  const { getTodoList, todos } = useTodos();
-  React.useEffect(() => {
-    getTodoList();
-  }, []);
-  return (
-    <ThemedView>
-      {todos.list.map((todo) => (
-        <Text key={todo.id}>{todo.title}</Text>
-      ))}
-    </ThemedView>
-  );
-};
-
-const CreateTodo = () => {
-  const { addTodo, todos } = useTodos();
-  React.useEffect(() => {
-    addTodo({ title: "New TODO", userId: 211 });
-  }, []);
-  return (
-    <ThemedView>
-      {todos.list.map((todo) => (
-        <Text key={todo.id}>{todo.title}</Text>
-      ))}
-    </ThemedView>
-  );
-};
-
-const NotFound = ({ id }: { id: number }) => {
-  const { todos, getTodo } = useTodos();
-  React.useEffect(() => {
-    getTodo(id);
-  }, [id]);
-  return <ThemedView>{!!todos.error && <Text>{todos.error}</Text>}</ThemedView>;
-};
-
-const DeleteTask = ({ id }: { id: number }) => {
-  const { todos, deleteTask, getTodoList } = useTodos();
-  const first = React.useRef(true);
-  React.useEffect(() => {
-    getTodoList().finally(() =>
-      deleteTask(id)
-        .unwrap()
-        .catch(() => {})
-    );
-  }, [id]);
-
-  return (
-    <ThemedView>
-      {todos.list.map((todo) => (
-        <Text key={todo.id}>{todo.title}</Text>
-      ))}
-      {!!todos.error && <Text>{todos.error}</Text>}
-    </ThemedView>
-  );
-};
-
-const CompleteTask = ({
-  id,
-  method,
-}: {
-  id: number;
-  method: "completeTask" | "undoCompletedTask";
-}) => {
-  const { todos, getTodoList, ...todoHook } = useTodos();
-  React.useEffect(() => {
-    getTodoList().finally(() =>
-      todoHook[method](id)
-        .unwrap()
-        .catch(() => {})
-    );
-  }, [id]);
-  const colorScheme = useColorScheme();
-  const task = todos.list.find((task) => task.id === id);
-  if (!task) {
-    return null;
-  }
-  return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <ThemedView lightColor="green" darkColor="gray">
-        <Text>{task.completed ? "COMPLETED" : "NOT_COMPLETED"}</Text>
-        {!!todos.error && <Text>{todos.error}</Text>}
-      </ThemedView>
-    </ThemeProvider>
-  );
-};
 describe("Redux TodoList", () => {
   const [FIRST_TASK, SECOND_TASK_COMPLETED] = TODO_LIST_MOCK;
   it("should render a list of todos correctly", async () => {
@@ -230,7 +129,8 @@ describe("Redux TodoList", () => {
       expect(screen.queryByText("task not completed")).toBeFalsy();
     });
   });
-  it("should throw error if try complete a completed task", async () => {
+
+  it("should throw error when it tries complete a completed task", async () => {
     render(
       <FakeReduxProvider>
         <CompleteTask method="undoCompletedTask" id={FIRST_TASK.id} />
@@ -240,6 +140,18 @@ describe("Redux TodoList", () => {
     await waitFor(() => {
       expect(screen.getByText("NOT_COMPLETED")).toBeTruthy();
       expect(screen.getByText("task not completed")).toBeTruthy();
+    });
+  });
+  it("should throw an error when it tries to manage the attribute 'completed' that is not found.", async () => {
+    render(
+      <FakeReduxProvider>
+        <CompleteTask method="completeTask" id={1} />
+        <CompleteTask method="undoCompletedTask" id={1} />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByText("not found").length).toBe(2);
     });
   });
 });
