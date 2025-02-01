@@ -1,6 +1,6 @@
 import { TaskGateway } from "~/core/infra/TaskGateway";
 
-const deleteTask = (taskGateway: TaskGateway, id: number) => {
+const deleteTask = async (taskGateway: TaskGateway, id: number) => {
   return taskGateway.deleteTask(id);
 };
 

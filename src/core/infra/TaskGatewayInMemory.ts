@@ -7,13 +7,13 @@ export const TODO_LIST_MOCK = [
     id: 191,
     title:
       "temporibus atque distinctio omnis eius impedit tempore molestias pariatur",
-    completed: true,
+    completed: false,
   },
   {
     userId: 10,
     id: 192,
     title: "ut quas possimus exercitationem sint voluptates",
-    completed: false,
+    completed: true,
   },
   {
     userId: 10,
@@ -65,7 +65,7 @@ export const TODO_LIST_MOCK = [
   },
 ];
 export const TaskGatewayInMemory = (): TaskGateway => {
-  const TODO_LIST = [...TODO_LIST_MOCK];
+  const TODO_LIST = JSON.parse(JSON.stringify(TODO_LIST_MOCK));
   const getTasks = async (): Promise<Task[]> => TODO_LIST.map(taskBuilder);
 
   const createTask = async (task: TaskDTO): Promise<Task> => {
@@ -90,5 +90,14 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     TODO_LIST.splice(taskIndex, 1);
   };
 
-  return { getTasks, createTask, getTask, deleteTask };
+  const completeTask = async (task: Task) => {
+    const currentTask = TODO_LIST.find((t) => t.id === task.id);
+    if (!currentTask) {
+      throw new Error("not found");
+    }
+    currentTask.completed = true;
+    return currentTask;
+  };
+
+  return { getTasks, createTask, getTask, deleteTask, completeTask };
 };

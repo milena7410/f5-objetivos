@@ -1,6 +1,6 @@
 import { TaskGateway } from "~/core/infra/TaskGateway";
 
-const getTodoList = (taskGateway: TaskGateway) => {
+const getTodoList = async (taskGateway: TaskGateway) => {
   return taskGateway.getTasks();
 };
 

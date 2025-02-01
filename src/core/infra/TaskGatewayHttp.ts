@@ -1,5 +1,5 @@
 import { HttpClient } from "../domain/HttpClient";
-import { taskBuilder, TaskDTO } from "../domain/Task";
+import { taskBuilder, TaskDTO, Task } from "../domain/Task";
 import { TaskGateway } from "./TaskGateway";
 
 export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
@@ -23,5 +23,13 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     await httpClient.delete<TaskDTO>(`/todos/${id}`);
   };
 
-  return { getTasks, createTask, getTask, deleteTask };
+  const completeTask = async (task: Task) => {
+    const updatedTask = await httpClient.put<Task>(
+      `/todos/${task.id}/complete`,
+      task
+    );
+    return taskBuilder(updatedTask);
+  };
+
+  return { getTasks, createTask, getTask, deleteTask, completeTask };
 }

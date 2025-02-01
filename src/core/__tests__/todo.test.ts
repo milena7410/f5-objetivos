@@ -8,7 +8,7 @@ import * as useCases from "../application/use-cases";
 import { toJSON } from "../domain/Task";
 
 describe("Todo Gateway", () => {
-  const FIRST_TASK = TODO_LIST_MOCK[0];
+  const [FIRST_TASK, SECOND_TASK_COMPLETED] = TODO_LIST_MOCK;
   let taskGateway: TaskGateway;
   beforeEach(() => {
     taskGateway = TaskGatewayInMemory();
@@ -52,6 +52,19 @@ describe("Todo Gateway", () => {
     const promise = useCases.getTask(taskGateway, id);
     await expect(promise).rejects.toMatchObject({
       message: "not found",
+    });
+  });
+
+  it("should mark task as complete", async () => {
+    await useCases.completeTask(taskGateway, FIRST_TASK);
+    const task = await useCases.getTask(taskGateway, FIRST_TASK.id);
+    expect(task.completed).toBe(true);
+  });
+
+  it("should throw error if try complete a completed task", async () => {
+    const promise = useCases.completeTask(taskGateway, SECOND_TASK_COMPLETED);
+    await expect(promise).rejects.toMatchObject({
+      message: "task already completed",
     });
   });
 });
