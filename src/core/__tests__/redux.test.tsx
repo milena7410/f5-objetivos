@@ -12,7 +12,6 @@ import { FakeReduxProvider } from "../__mocks__/FakeProvider";
 import { ThemedView } from "~/components/ThemedView";
 import { useColorScheme } from "~/hooks/useColorScheme.web";
 import { TODO_LIST_MOCK } from "../infra/TaskGatewayInMemory";
-import { getTasks } from "~/store/reducers/todos/thunk";
 
 const GetTodoListEmpty = () => {
   const { todos } = useTodos();
@@ -85,8 +84,31 @@ const DeleteTask = ({ id }: { id: number }) => {
   );
 };
 
+const CompleteTask = ({ id }: { id: number }) => {
+  const { todos, getTodoList, completeTask } = useTodos();
+  React.useEffect(() => {
+    getTodoList().finally(() =>
+      completeTask(id)
+        .unwrap()
+        .catch(() => {})
+    );
+  }, [id]);
+  const colorScheme = useColorScheme();
+  const task = todos.list.find((task) => task.id === id);
+  if (!task) {
+    return null;
+  }
+  return (
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemedView lightColor="green" darkColor="gray">
+        <Text>{task.completed ? "COMPLETED" : "NOT_COMPLETED"}</Text>
+        {!!todos.error && <Text>{todos.error}</Text>}
+      </ThemedView>
+    </ThemeProvider>
+  );
+};
 describe("Redux TodoList", () => {
-  const FIRST_TASK = TODO_LIST_MOCK[0];
+  const [FIRST_TASK, SECOND_TASK_COMPLETED] = TODO_LIST_MOCK;
   it("should render a list of todos correctly", async () => {
     render(
       <FakeReduxProvider>
@@ -158,6 +180,32 @@ describe("Redux TodoList", () => {
     await waitFor(() => {
       expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
       expect(screen.queryByText("not found")).toBeFalsy();
+    });
+  });
+
+  it("should complete task", async () => {
+    render(
+      <FakeReduxProvider>
+        <CompleteTask id={FIRST_TASK.id} />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("COMPLETED")).toBeTruthy();
+      expect(screen.queryByText("task already completed")).toBeFalsy();
+    });
+  });
+
+  it("should throw error if try complete a completed task", async () => {
+    render(
+      <FakeReduxProvider>
+        <CompleteTask id={SECOND_TASK_COMPLETED.id} />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("COMPLETED")).toBeTruthy();
+      expect(screen.getByText("task already completed")).toBeTruthy();
     });
   });
 });

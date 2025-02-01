@@ -21,10 +21,15 @@ export const useTodos = () => {
     []
   );
 
+  const completeTask = React.useCallback(
+    (id: number) => dispatch(thunk.completeTask(id)),
+    []
+  );
+
   const deleteTask = React.useCallback(
     (id: number) => dispatch(thunk.deleteTask(id)),
     []
   );
 
-  return { todos, getTodoList, addTodo, getTodo, deleteTask };
+  return { todos, getTodoList, addTodo, getTodo, deleteTask, completeTask };
 };

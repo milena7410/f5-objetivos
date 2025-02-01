@@ -37,8 +37,16 @@ const todoSlice = createSlice({
       state.state = "success";
       state.error = "";
     });
+    builder.addCase(thunk.completeTask.fulfilled, (state, actions) => {
+      const task = actions.payload;
+      const index = state.list.findIndex((task) => task.id === task.id);
+      state.list.splice(index, 1, task);
+      state.state = "success";
+      state.error = "";
+    });
     builder.addMatcher(
       isAnyOf(
+        thunk.completeTask.pending,
         thunk.getTasks.pending,
         thunk.createTask.pending,
         thunk.deleteTask.pending
@@ -50,6 +58,7 @@ const todoSlice = createSlice({
     );
     builder.addMatcher(
       isAnyOf(
+        thunk.completeTask.rejected,
         thunk.getTasks.rejected,
         thunk.createTask.rejected,
         thunk.deleteTask.rejected
