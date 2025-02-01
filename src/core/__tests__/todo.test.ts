@@ -55,16 +55,33 @@ describe("Todo Gateway", () => {
     });
   });
 
-  it("should mark task as complete", async () => {
-    await useCases.completeTask(taskGateway, FIRST_TASK);
-    const task = await useCases.getTask(taskGateway, FIRST_TASK.id);
-    expect(task.completed).toBe(true);
+  it("should mark task as completed", async () => {
+    const task = FIRST_TASK;
+    await useCases.completeTask(taskGateway, task);
+    const completedTask = await useCases.getTask(taskGateway, task.id);
+    expect(completedTask.completed).toBe(true);
   });
 
-  it("should throw error if try complete a completed task", async () => {
-    const promise = useCases.completeTask(taskGateway, SECOND_TASK_COMPLETED);
+  it("should throw error when try complete a completed task", async () => {
+    const task = SECOND_TASK_COMPLETED;
+    const promise = useCases.completeTask(taskGateway, task);
     await expect(promise).rejects.toMatchObject({
       message: "task already completed",
+    });
+  });
+
+  it("should undo completed task", async () => {
+    const task = SECOND_TASK_COMPLETED;
+    await useCases.undoCompletedTask(taskGateway, task);
+    const undoTask = await useCases.getTask(taskGateway, task.id);
+    expect(undoTask.completed).toBe(false);
+  });
+
+  it("should throw error when try undo completed task that it isn't completed", async () => {
+    const task = FIRST_TASK;
+    const promise = useCases.undoCompletedTask(taskGateway, task);
+    await expect(promise).rejects.toMatchObject({
+      message: "task not completed",
     });
   });
 });

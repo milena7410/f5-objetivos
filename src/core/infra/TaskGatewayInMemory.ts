@@ -99,5 +99,21 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     return currentTask;
   };
 
-  return { getTasks, createTask, getTask, deleteTask, completeTask };
+  const undoCompletedTask = async (task: Task) => {
+    const currentTask = TODO_LIST.find((t) => t.id === task.id);
+    if (!currentTask) {
+      throw new Error("not found");
+    }
+    currentTask.completed = false;
+    return currentTask;
+  };
+
+  return {
+    getTasks,
+    createTask,
+    getTask,
+    deleteTask,
+    completeTask,
+    undoCompletedTask,
+  };
 };

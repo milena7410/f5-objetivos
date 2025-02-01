@@ -31,5 +31,20 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     return taskBuilder(updatedTask);
   };
 
-  return { getTasks, createTask, getTask, deleteTask, completeTask };
+  const undoCompletedTask = async (task: Task) => {
+    const updatedTask = await httpClient.put<Task>(
+      `/todos/${task.id}/complete`,
+      task
+    );
+    return taskBuilder(updatedTask);
+  };
+
+  return {
+    getTasks,
+    createTask,
+    getTask,
+    deleteTask,
+    completeTask,
+    undoCompletedTask,
+  };
 }
