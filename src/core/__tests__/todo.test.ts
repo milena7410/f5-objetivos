@@ -77,11 +77,27 @@ describe("Todo Gateway", () => {
     expect(undoTask.completed).toBe(false);
   });
 
-  it("should throw error when try undo completed task that it isn't completed", async () => {
+  it("should throw an error when trying to undo a task that isn't marked as completed.", async () => {
     const task = FIRST_TASK;
     const promise = useCases.undoCompletedTask(taskGateway, task);
     await expect(promise).rejects.toMatchObject({
       message: "task not completed",
+    });
+  });
+
+  it("should throw an error when it tries to manage the attribute 'completed' that is not found.", async () => {
+    const task = FIRST_TASK;
+    await useCases.deleteTask(taskGateway, task.id);
+    const promiseComplete = useCases.completeTask(taskGateway, task);
+    const promiseUndoCompleted = useCases.undoCompletedTask(taskGateway, {
+      ...task,
+      completed: true,
+    });
+    expect(promiseComplete).rejects.toMatchObject({
+      message: "not found",
+    });
+    expect(promiseUndoCompleted).rejects.toMatchObject({
+      message: "not found",
     });
   });
 });
