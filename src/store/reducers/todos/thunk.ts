@@ -51,6 +51,19 @@ export const completeTask = thunk(
   }
 );
 
+export const undoCompletedTask = thunk(
+  "@todos/undoCompletedTask",
+  async (id: number, { extra, getState }) => {
+    const { todos } = getState();
+    const { taskGateway } = extra as ThunkAPIExtras;
+    const todo = todos.list.find((task) => task.id === id);
+    if (!todo) {
+      throw new Error("not found");
+    }
+    return useCases.undoCompletedTask(taskGateway, todo);
+  }
+);
+
 export const deleteTask = thunk(
   "@todos/deleteTask",
   async (id: number, { extra }) => {

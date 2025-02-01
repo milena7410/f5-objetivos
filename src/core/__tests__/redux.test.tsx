@@ -84,11 +84,17 @@ const DeleteTask = ({ id }: { id: number }) => {
   );
 };
 
-const CompleteTask = ({ id }: { id: number }) => {
-  const { todos, getTodoList, completeTask } = useTodos();
+const CompleteTask = ({
+  id,
+  method,
+}: {
+  id: number;
+  method: "completeTask" | "undoCompletedTask";
+}) => {
+  const { todos, getTodoList, ...todoHook } = useTodos();
   React.useEffect(() => {
     getTodoList().finally(() =>
-      completeTask(id)
+      todoHook[method](id)
         .unwrap()
         .catch(() => {})
     );
@@ -186,7 +192,7 @@ describe("Redux TodoList", () => {
   it("should complete task", async () => {
     render(
       <FakeReduxProvider>
-        <CompleteTask id={FIRST_TASK.id} />
+        <CompleteTask method="completeTask" id={FIRST_TASK.id} />
       </FakeReduxProvider>
     );
 
@@ -199,13 +205,41 @@ describe("Redux TodoList", () => {
   it("should throw error if try complete a completed task", async () => {
     render(
       <FakeReduxProvider>
-        <CompleteTask id={SECOND_TASK_COMPLETED.id} />
+        <CompleteTask method="completeTask" id={SECOND_TASK_COMPLETED.id} />
       </FakeReduxProvider>
     );
 
     await waitFor(() => {
       expect(screen.getByText("COMPLETED")).toBeTruthy();
       expect(screen.getByText("task already completed")).toBeTruthy();
+    });
+  });
+
+  it("should undo completed task", async () => {
+    render(
+      <FakeReduxProvider>
+        <CompleteTask
+          method="undoCompletedTask"
+          id={SECOND_TASK_COMPLETED.id}
+        />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("NOT_COMPLETED")).toBeTruthy();
+      expect(screen.queryByText("task not completed")).toBeFalsy();
+    });
+  });
+  it("should throw error if try complete a completed task", async () => {
+    render(
+      <FakeReduxProvider>
+        <CompleteTask method="undoCompletedTask" id={FIRST_TASK.id} />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("NOT_COMPLETED")).toBeTruthy();
+      expect(screen.getByText("task not completed")).toBeTruthy();
     });
   });
 });
