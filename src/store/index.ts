@@ -41,8 +41,6 @@ export const store = configureStore({
       : getDefaultEnhancers(),
 });
 
-console.log({ FOI: console.tron.createEnhancer });
-
 export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;

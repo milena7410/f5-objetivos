@@ -1,11 +1,12 @@
 import React from "react";
-import { Pressable, PressableProps, Text } from "react-native";
+import { Pressable, PressableProps, Text, View } from "react-native";
 
 type ButtonProps = {
   title: string;
   variant?: "primary" | "secondary" | "danger";
   disabled?: boolean;
   textClassname?: string;
+  buttonClassname?: string;
 } & PressableProps;
 
 type Variant = {
@@ -18,12 +19,13 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   className = "",
   textClassname = "",
+  buttonClassname = "",
   ...rest
 }) => {
   const variantButtonStyle: Variant = {
     enabled: {
-      primary: "bg-black dark:bg-white",
-      secondary: "bg-white dark:bg-black",
+      primary: " bg-black dark:bg-white",
+      secondary: "border border-black bg-white dark:bg-black dark:border-white",
       danger: "bg-danger",
     },
     disabled: {
@@ -49,15 +51,19 @@ const Button: React.FC<ButtonProps> = ({
   const disabledProp = disabled ? "disabled" : "enabled";
   return (
     <Pressable
+      className={`${buttonClassname} rounded-full self-center h-14 w-40 "`}
       disabled={disabled}
-      className={`round-lg ${variantButtonStyle[disabledProp][variant]} ${className}`}
       {...rest}
     >
-      <Text
-        className={`font-bold ${textStyle[disabledProp][variant]} ${textClassname}`}
+      <View
+        className={`${className}  ${variantButtonStyle[disabledProp][variant]} items-center justify-center rounded-full flex-1 self-stretch`}
       >
-        {title}
-      </Text>
+        <Text
+          className={`${textClassname} text-sm font-bold ${textStyle[disabledProp][variant]}`}
+        >
+          {title}
+        </Text>
+      </View>
     </Pressable>
   );
 };
