@@ -1,30 +1,65 @@
-import { StatusBar } from "expo-status-bar";
-import { Pressable, Text, View } from "react-native";
+import React from "react";
+import { Pressable, PressableProps, Text } from "react-native";
 
-import { useThemeContext } from "~/contexts/ThemeContext";
-import { ThemedText } from "../ThemedText";
+type ButtonProps = {
+  title: string;
+  variant?: "primary" | "secondary" | "danger";
+  disabled?: boolean;
+  textClassname?: string;
+} & PressableProps;
 
-export const Button = () => {
-  const { toggleColorScheme, setColorScheme } = useThemeContext();
+type Variant = {
+  disabled: { primary: string; secondary: string; danger: string };
+  enabled: { primary: string; secondary: string; danger: string };
+};
+const Button: React.FC<ButtonProps> = ({
+  variant = "primary",
+  title,
+  disabled,
+  className = "",
+  textClassname = "",
+  ...rest
+}) => {
+  const variantButtonStyle: Variant = {
+    enabled: {
+      primary: "bg-black dark:bg-white",
+      secondary: "bg-white dark:bg-black",
+      danger: "bg-danger",
+    },
+    disabled: {
+      primary: "bg-gray-500",
+      secondary: "bg-gray-300",
+      danger: "bg-red-300",
+    },
+  };
 
+  const textStyle: Variant = {
+    enabled: {
+      primary: "text-white dark:text-black",
+      secondary: "text-black dark:text-white",
+      danger: "text-txt-danger",
+    },
+    disabled: {
+      primary: "text-white",
+      secondary: "text-black ",
+      danger: "text-txt-danger",
+    },
+  };
+
+  const disabledProp = disabled ? "disabled" : "enabled";
   return (
-    <View className="bg-white gap-4 dark:bg-gray-800 rounded-lg px-6 py-8">
-      <Text className="text-red-500">
-        Open up App.js to start working on your app!
+    <Pressable
+      disabled={disabled}
+      className={`round-lg ${variantButtonStyle[disabledProp][variant]} ${className}`}
+      {...rest}
+    >
+      <Text
+        className={`font-bold ${textStyle[disabledProp][variant]} ${textClassname}`}
+      >
+        {title}
       </Text>
-      <Pressable
-        onPress={toggleColorScheme}
-        className="align-center justify-center bg-blue-700 dark:bg-black border-white dark:border-black rounded-md"
-      >
-        <ThemedText className="self-center text-white">SWITCH</ThemedText>
-      </Pressable>
-      <Pressable
-        onPress={() => setColorScheme("system")}
-        className="align-center justify-center bg-black rounded-md"
-      >
-        <ThemedText className="self-center text-white">SYSTEM</ThemedText>
-      </Pressable>
-      <StatusBar style="auto" />
-    </View>
+    </Pressable>
   );
 };
+
+export { Button };

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { rootReducer } from "../../store/reducers";
-import { TaskGatewayInMemory } from "../infra/TaskGatewayInMemory";
+import { rootReducer } from "../reducers";
+import { TaskGatewayInMemory } from "../../core/infra/TaskGatewayInMemory";
 
 export const store = () => {
   return configureStore({

@@ -20,8 +20,7 @@
       "/node_modules/(?!react-redux|)/"
     ],
     "moduleNameMapper": {
-      "^.+\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "^nativewind$": "identity-obj-proxy"
+      "^.+\\.(css|less|scss|sass)$": "identity-obj-proxy"
     }
   },
   "dependencies": {

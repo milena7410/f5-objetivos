@@ -2,7 +2,7 @@ import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react-native";
 
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
-import { TODO_LIST_MOCK } from "../infra/TaskGatewayInMemory";
+import { TODO_LIST_MOCK } from "~/core/infra/TaskGatewayInMemory";
 import {
   CompleteTask,
   CreateTodo,
