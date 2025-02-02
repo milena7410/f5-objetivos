@@ -9,10 +9,6 @@ import { store } from "~/store";
 import { ThemeProvider } from "~/contexts/ThemeContext";
 import { EntryPoint } from "~/components/page/EntryPoint";
 
-if (__DEV__) {
-  require("~/config/reactotron");
-}
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 

@@ -15,6 +15,10 @@ import { tasksGatewayHttp } from "../core/infra/TaskGatewayHttp";
 import { api } from "../core/infra/adapters/httpClient";
 import { TaskGateway } from "../core/infra/TaskGateway";
 
+if (__DEV__) {
+  require("~/config/reactotron");
+}
+
 export type ThunkAPIExtras = { taskGateway: TaskGateway };
 
 export type AppAsyncThunkConfig = {
@@ -36,6 +40,8 @@ export const store = configureStore({
       ? getDefaultEnhancers().concat(console.tron.createEnhancer())
       : getDefaultEnhancers(),
 });
+
+console.log({ FOI: console.tron.createEnhancer });
 
 export const persistor = persistStore(store);
 
