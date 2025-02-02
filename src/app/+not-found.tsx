@@ -8,7 +8,7 @@ import { StyleSheet } from "react-native";
 
 import { ThemedText } from "~/components/ThemedText";
 import { ThemedView } from "~/components/ThemedView";
-import { useColorScheme } from "~/hooks/useColorScheme";
+import { useThemeContext } from "~/contexts/ThemeContext";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 const NotFoundScreen = () => {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useThemeContext();
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Screen options={{ title: "Oops!" }} />

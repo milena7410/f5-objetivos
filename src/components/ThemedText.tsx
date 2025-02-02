@@ -13,6 +13,7 @@ export function ThemedText({
   lightColor,
   darkColor,
   type = "default",
+  className,
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
@@ -25,7 +26,14 @@ export function ThemedText({
   };
 
   const selectedStyle = styleMapping[type];
-  return <Text style={[{ color }, selectedStyle, style]} {...rest} />;
+
+  return (
+    <Text
+      className={className}
+      style={[{ color: className ? undefined : color }, selectedStyle, style]}
+      {...rest}
+    />
+  );
 }
 
 const styles = StyleSheet.create({

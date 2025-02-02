@@ -6,15 +6,15 @@ import { HapticTab } from "~/components/HapticTab";
 import { IconSymbol } from "~/components/ui/IconSymbol";
 import TabBarBackground from "~/components/ui/TabBarBackground";
 import { Colors } from "~/constants/Colors";
-import { useColorScheme } from "~/hooks/useColorScheme";
+import { useThemeContext } from "~/contexts/ThemeContext";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useThemeContext();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,

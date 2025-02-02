@@ -1,8 +1,9 @@
 import * as React from "react";
-import { ActivityIndicatorBase, Button, ScrollView, View } from "react-native";
+import { ActivityIndicatorBase, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemedText } from "~/components/ThemedText";
 import { ThemedView } from "~/components/ThemedView";
+import * as Atoms from "~/components/atoms";
 import { useTodos } from "~/store/reducers/todos/actions";
 const App = () => {
   const { addTodo, todos, getTodoList } = useTodos();
@@ -11,31 +12,28 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center", gap: 8, margin: 20 }}>
-      <ScrollView>
+    <SafeAreaView className="flex-1">
+      <ScrollView className="flex-1">
         {todos.state === "pending" ? (
-          <ActivityIndicatorBase></ActivityIndicatorBase>
+          <ThemedText>...PENDING</ThemedText>
         ) : (
-          todos.list.map((todo) => (
-            <ThemedText
-              key={todo.title}
-              style={{ color: todo.completed ? "green" : "yellow" }}
-            >
-              {todo.title}
-            </ThemedText>
-          ))
+          <ThemedView>
+            {todos.list.map((todo) => (
+              <ThemedText
+                key={todo.title}
+                className={`${
+                  todo.completed
+                    ? "text-green-500"
+                    : "text-gray-600 dark:text-gray-300"
+                }`}
+              >
+                {todo.title}
+              </ThemedText>
+            ))}
+          </ThemedView>
         )}
       </ScrollView>
-      <Button
-        title="CREATE"
-        onPress={() =>
-          addTodo({
-            userId: 1,
-            title: "NOVA TAREFA",
-            completed: false,
-          })
-        }
-      />
+      <Atoms.Button />
     </SafeAreaView>
   );
 };

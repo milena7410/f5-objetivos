@@ -1,18 +1,13 @@
 import * as React from "react";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
+
 import "react-native-reanimated";
 
 import { store } from "~/store";
-import { useColorScheme } from "~/hooks/useColorScheme";
+import { ThemeProvider } from "~/contexts/ThemeContext";
+import { EntryPoint } from "~/components/page/EntryPoint";
 
 if (__DEV__) {
   require("~/config/reactotron");
@@ -22,7 +17,6 @@ if (__DEV__) {
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("~/assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -39,12 +33,8 @@ const RootLayout = () => {
 
   return (
     <Provider store={store}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
+      <ThemeProvider>
+        <EntryPoint />
       </ThemeProvider>
     </Provider>
   );

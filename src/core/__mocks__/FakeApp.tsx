@@ -8,11 +8,11 @@ import { Text } from "react-native";
 
 import { ThemedView } from "~/components/ThemedView";
 import { useTodos } from "~/store/reducers/todos/actions";
-import { useColorScheme } from "~/hooks/useColorScheme.web";
+import { useThemeContext } from "~/contexts/ThemeContext";
 
 export const GetTodoListEmpty = () => {
   const { todos } = useTodos();
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useThemeContext();
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <ThemedView lightColor="green" darkColor="gray">
@@ -96,7 +96,7 @@ export const CompleteTask = ({
         .catch(() => {})
     );
   }, [id]);
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useThemeContext();
   const task = todos.list.find((task) => task.id === id);
 
   return (
