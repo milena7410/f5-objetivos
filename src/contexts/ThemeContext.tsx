@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useColorScheme } from "nativewind";
+import { useColorScheme, cssInterop } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import "~/styles/global.css";
@@ -10,11 +10,13 @@ const ThemeContext = React.createContext<{
   colorScheme: "light" | "dark";
   toggleColorScheme: VoidFunction;
   setColorScheme(newColor: Mode): void;
+  cssInterop: typeof cssInterop;
 }>({
   isLoaded: false,
   colorScheme: "light",
   toggleColorScheme: () => {},
   setColorScheme: () => {},
+  cssInterop: cssInterop,
 });
 
 export function ThemeProvider({ children }: React.PropsWithChildren) {
@@ -61,7 +63,13 @@ export function ThemeProvider({ children }: React.PropsWithChildren) {
   }, [colorScheme]);
 
   const value = React.useMemo(
-    () => ({ colorScheme, toggleColorScheme, setColorScheme, isLoaded }),
+    () => ({
+      colorScheme,
+      toggleColorScheme,
+      setColorScheme,
+      cssInterop,
+      isLoaded,
+    }),
     [colorScheme, toggleColorScheme, setColorScheme, isLoaded]
   );
 

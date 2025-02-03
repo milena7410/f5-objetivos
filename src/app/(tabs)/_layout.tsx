@@ -1,20 +1,24 @@
 import { Tabs } from "expo-router";
+
 import * as React from "react";
 import { Platform } from "react-native";
 
 import { HapticTab } from "~/components/HapticTab";
-import { IconSymbol } from "~/components/ui/IconSymbol";
+import { CheckListIcon } from "~/components/ui/Icons";
 import TabBarBackground from "~/components/ui/TabBarBackground";
-import { Colors } from "~/constants/Colors";
-import { useThemeContext } from "~/contexts/ThemeContext";
+import { useThemeColors } from "~/hooks/useThemeColor";
 
+const getIconColor = (focused: boolean) =>
+  focused
+    ? "text-primary dark:text-white"
+    : "text-primary/50 dark:text-white/50";
 export default function TabLayout() {
-  const { colorScheme } = useThemeContext();
+  const color = useThemeColors();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarInactiveTintColor: color.tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -31,8 +35,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+          tabBarIcon: ({ size, focused }) => (
+            <CheckListIcon size={size} className={getIconColor(focused)} />
           ),
         }}
       />
@@ -40,8 +44,8 @@ export default function TabLayout() {
         name="example"
         options={{
           title: "Exemplo",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="chevron.left" color={color} />
+          tabBarIcon: ({ size, focused }) => (
+            <CheckListIcon size={size} className={getIconColor(focused)} />
           ),
         }}
       />
@@ -49,8 +53,8 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+          tabBarIcon: ({ size, focused }) => (
+            <CheckListIcon size={size} className={getIconColor(focused)} />
           ),
         }}
       />

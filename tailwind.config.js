@@ -8,6 +8,9 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
+      fontFamily: {
+        mono: "SpaceMono",
+      },
       colors: {
         primary: "#A2C8FF",
         "primary-50": "#C8E4FF",
@@ -24,7 +27,7 @@ module.exports = {
         "txt-primary": "#003366",
         "txt-secondary": "#004080",
         "txt-light": "#5D6D7E",
-        "txt-dark": "#001F33",
+        "txt-dark": "#F0F9FF",
         "txt-muted": "#8C9BA5",
         "txt-info": "#1F618D",
         "txt-warning": "#A9C3D5",

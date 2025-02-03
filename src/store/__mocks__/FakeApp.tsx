@@ -6,21 +6,19 @@ import {
 } from "@react-navigation/native";
 import { Text } from "react-native";
 
-import { ThemedView } from "~/components/ThemedView";
+import { ThemedView } from "~/components/atoms/ThemedView";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { useThemeContext } from "~/contexts/ThemeContext";
 
 export const GetTodoListEmpty = () => {
   const { todos } = useTodos();
-  const { colorScheme } = useThemeContext();
+
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <ThemedView lightColor="green" darkColor="gray">
-        {todos.list.map((todo) => (
-          <Text key={todo.id}>{todo.title}</Text>
-        ))}
-      </ThemedView>
-    </ThemeProvider>
+    <ThemedView>
+      {todos.list.map((todo) => (
+        <Text key={todo.id}>{todo.title}</Text>
+      ))}
+    </ThemedView>
   );
 };
 

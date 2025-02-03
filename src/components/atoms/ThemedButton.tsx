@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, PressableProps, Text, View } from "react-native";
 
-type ButtonProps = {
+type ThemedButtonProps = {
   title: string;
   variant?: "primary" | "secondary" | "danger";
   disabled?: boolean;
@@ -13,7 +13,7 @@ type Variant = {
   disabled: { primary: string; secondary: string; danger: string };
   enabled: { primary: string; secondary: string; danger: string };
 };
-const Button: React.FC<ButtonProps> = ({
+const ThemedButton = ({
   variant = "primary",
   title,
   disabled,
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   textClassname = "",
   buttonClassname = "",
   ...rest
-}) => {
+}: ThemedButtonProps) => {
   const variantButtonStyle: Variant = {
     enabled: {
       primary: " bg-black dark:bg-white",
@@ -68,4 +68,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-export { Button };
+export { ThemedButton };

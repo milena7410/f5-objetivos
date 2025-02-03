@@ -9,7 +9,7 @@ import {
 import { useColorScheme } from "nativewind";
 
 import { ThemeProvider } from "~/contexts/ThemeContext";
-import { Button } from "../Button";
+import { Button } from "../ThemedButton";
 import "~/styles/global.css";
 
 describe("Button Component", () => {
