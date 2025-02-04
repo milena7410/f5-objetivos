@@ -7,13 +7,13 @@ import { ThemedView } from "~/components/atoms/ThemedView";
 import * as Atoms from "~/components/atoms";
 import { useThemeContext } from "~/contexts/ThemeContext";
 import { useTodos } from "~/store/reducers/todos/actions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const App = () => {
   const { colorScheme, setColorScheme, toggleColorScheme } = useThemeContext();
-  const { todos, getTodoList } = useTodos();
-  React.useEffect(() => {
-    getTodoList();
-  }, []);
+  const { todos } = useTodos();
+
+  React.useEffect(() => {}, []);
   return (
     <SafeAreaView className="flex-1 bg-primary">
       <ThemedView className="p-4 flex-1 align-center justify-between">

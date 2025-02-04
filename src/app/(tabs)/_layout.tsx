@@ -4,21 +4,21 @@ import * as React from "react";
 import { Platform } from "react-native";
 
 import { HapticTab } from "~/components/HapticTab";
-import { CheckListIcon } from "~/components/ui/Icons";
+import { Icons } from "~/components/atoms/Icons";
 import TabBarBackground from "~/components/ui/TabBarBackground";
 import { useThemeColors } from "~/hooks/useThemeColor";
 
 const getIconColor = (focused: boolean) =>
   focused
-    ? "text-primary dark:text-white"
-    : "text-primary/50 dark:text-white/50";
+    ? " text-primary-500 dark:text-white"
+    : " text-primary/50 dark:text-white/50";
 export default function TabLayout() {
   const color = useThemeColors();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarInactiveTintColor: color.tint,
+        tabBarActiveTintColor: color.tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -34,27 +34,42 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Lista",
           tabBarIcon: ({ size, focused }) => (
-            <CheckListIcon size={size} className={getIconColor(focused)} />
+            <Icons
+              name="checklist"
+              type="octicons"
+              size={size}
+              className={getIconColor(focused)}
+            />
           ),
         }}
       />
       <Tabs.Screen
         name="example"
         options={{
-          title: "Exemplo",
+          title: "Feito",
           tabBarIcon: ({ size, focused }) => (
-            <CheckListIcon size={size} className={getIconColor(focused)} />
+            <Icons
+              name="check-square"
+              type="feather"
+              size={size}
+              className={getIconColor(focused)}
+            />
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
+          title: "A fazer",
           tabBarIcon: ({ size, focused }) => (
-            <CheckListIcon size={size} className={getIconColor(focused)} />
+            <Icons
+              name="square"
+              type="feather"
+              size={size}
+              className={getIconColor(focused)}
+            />
           ),
         }}
       />

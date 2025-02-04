@@ -47,11 +47,11 @@ export function ThemeProvider({ children }: React.PropsWithChildren) {
 
   const setColorScheme = React.useCallback((mode: Mode) => {
     if (mode === "system" && window?.matchMedia) {
-      setColorMode(mode);
       mode = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
     }
+    setColorMode(mode);
     setNativeColorSchema(mode);
   }, []);
 
