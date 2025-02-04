@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { useThemeContext } from "~/contexts/ThemeContext";
 import { useLoadFont } from "~/hooks/useLoadFont";
 import { useSplashScreen } from "~/hooks/useSplashScreen";
+import * as Molecules from "../molecules";
 
 const EntryPoint = () => {
   const { isLoaded, colorScheme } = useThemeContext();
@@ -14,7 +15,7 @@ const EntryPoint = () => {
   return (
     <>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ header: Molecules.Header }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style={colorScheme === "light" ? "dark" : "light"} />

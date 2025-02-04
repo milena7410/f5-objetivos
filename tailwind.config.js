@@ -10,6 +10,10 @@ module.exports = {
     extend: {
       fontFamily: {
         "space-mono": "SpaceMono",
+        urbanist: "Urbanist",
+        "urbanist-italic": "UrbanistItalic",
+        "urbanist-semibold": "UrbanistSemibold",
+        "urbanist-bold": "UrbanistBold",
       },
       height: {
         m: 1,
