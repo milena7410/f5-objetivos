@@ -1,6 +1,5 @@
 import * as React from "react";
-import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
+
 import { Provider } from "react-redux";
 
 import "react-native-reanimated";
@@ -8,32 +7,16 @@ import "react-native-reanimated";
 import { store } from "~/store";
 import { ThemeProvider } from "~/contexts/ThemeContext";
 import { EntryPoint } from "~/components/page/EntryPoint";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-const RootLayout = () => {
-  const [loaded] = useFonts({
-    SpaceMono: require("~/assets/fonts/SpaceMono-Regular.ttf"),
-  });
-
-  React.useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <Provider store={store}>
-      <ThemeProvider>
+const RootLayout = () => (
+  <Provider store={store}>
+    <ThemeProvider>
+      <GestureHandlerRootView>
         <EntryPoint />
-      </ThemeProvider>
-    </Provider>
-  );
-};
+      </GestureHandlerRootView>
+    </ThemeProvider>
+  </Provider>
+);
 
 export default RootLayout;

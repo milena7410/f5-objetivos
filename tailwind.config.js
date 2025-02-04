@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: "SpaceMono",
+        "space-mono": "SpaceMono",
       },
       colors: {
         primary: "#A2C8FF",
