@@ -13,7 +13,7 @@ const ThemedText = ({
 }: ThemedTextProps) => {
   return (
     <Text
-      className={className + " text-txt-primary dark:text-txt-dark"}
+      className={`${className} text-txt-primary dark:text-txt-dark`}
       {...rest}
     />
   );

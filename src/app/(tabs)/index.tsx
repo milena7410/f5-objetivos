@@ -1,86 +1,26 @@
 import * as React from "react";
-import { ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ThemedText } from "~/components/atoms/ThemedText";
-import { ThemedView } from "~/components/atoms/ThemedView";
-import * as Atoms from "~/components/atoms";
-import { useThemeContext } from "~/contexts/ThemeContext";
+import * as Organism from "~/components/organism";
 import { useTodos } from "~/store/reducers/todos/actions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Task } from "~/core/domain/Task";
 
 const App = () => {
-  const { colorScheme, setColorScheme, toggleColorScheme } = useThemeContext();
-  const { todos } = useTodos();
+  const { todos, getTodoList } = useTodos();
+  const [list, setList] = React.useState(todos.list);
 
-  React.useEffect(() => {}, []);
-  return (
-    <SafeAreaView className="flex-1 bg-primary">
-      <ThemedView className="p-4 flex-1 align-center justify-between">
-        <ThemedText>{colorScheme}</ThemedText>
-        <Atoms.ThemedButton
-          variant="primary"
-          onPress={() => setColorScheme("light")}
-          title="PRIMARY_LIGHT"
-        />
-        <Atoms.ThemedButton
-          variant="primary"
-          disabled
-          onPress={() => setColorScheme("light")}
-          title="PRIMARY_LIGHT_DISABLED"
-        />
-        <Atoms.ThemedButton
-          variant="secondary"
-          onPress={() => setColorScheme("dark")}
-          title="SECONDARY_DARK"
-        />
-        <Atoms.ThemedButton
-          disabled
-          variant="secondary"
-          onPress={() => setColorScheme("dark")}
-          title="SECONDARY_DARK_DISABLED"
-        />
+  const handleSetList = (todoList: Task[]) => {
+    setList(todoList);
+  };
 
-        <Atoms.ThemedButton
-          variant="danger"
-          onPress={toggleColorScheme}
-          title="DANGER_SWITCH"
-        />
-        <Atoms.ThemedButton
-          disabled
-          variant="danger"
-          onPress={toggleColorScheme}
-          title="DANGER_SWITCH_DISABLED"
-        />
-      </ThemedView>
-      <ThemedView className="p-4 flex-row justify-evenly bg-white align-center">
-        <Atoms.ThemedButton
-          variant="primary"
-          onPress={() => setColorScheme("light")}
-          title="PRIMARY_LIGHT"
-        />
+  React.useEffect(() => {
+    getTodoList();
+  }, []);
 
-        <Atoms.ThemedButton
-          variant="secondary"
-          onPress={() => setColorScheme("dark")}
-          title="SECONDARY_DARK"
-        />
-      </ThemedView>
-      <ScrollView>
-        {todos.list
-          .filter(
-            ({ id }, index, arr) => arr.findIndex((t) => t.id === id) === index
-          )
-          .map(({ id, title, completed }) => (
-            <ThemedView key={id}>
-              <ThemedText className={completed ? "text-green-400" : ""}>
-                {title} {completed}
-              </ThemedText>
-            </ThemedView>
-          ))}
-      </ScrollView>
-    </SafeAreaView>
-  );
+  React.useEffect(() => {
+    setList(todos.list);
+  }, [todos.list]);
+
+  return <Organism.DraggableList list={list} setList={handleSetList} />;
 };
 
 export default App;

@@ -11,7 +11,7 @@ const IconTypes = {
 
 type CheckListIconProps = {
   type: keyof typeof IconTypes;
-  name: "home" | "check-square" | "square" | "checklist";
+  name: "home" | "check-square" | "square" | "checklist" | "trash-2";
   size?: number;
   className?: string;
   style?: {};

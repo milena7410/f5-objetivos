@@ -11,6 +11,9 @@ module.exports = {
       fontFamily: {
         "space-mono": "SpaceMono",
       },
+      height: {
+        m: 1,
+      },
       colors: {
         primary: "#A2C8FF",
         "primary-50": "#C8E4FF",

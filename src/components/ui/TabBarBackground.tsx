@@ -1,5 +1,5 @@
-export default undefined;
-
-export function useBottomTabOverflow() {
+const useBottomTabOverflow = () => {
   return 0;
-}
+};
+const BlurTabBarBackground = undefined;
+export { BlurTabBarBackground, useBottomTabOverflow };
