@@ -1,17 +1,25 @@
 import * as React from "react";
 import Feather from "@expo/vector-icons/Feather";
 import Octicons from "@expo/vector-icons/Octicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import { cssInterop } from "nativewind";
 
 const IconTypes = {
+  materialIcons: MaterialIcons,
   feather: Feather,
   octicons: Octicons,
 };
 
 type CheckListIconProps = {
   type: keyof typeof IconTypes;
-  name: "home" | "check-square" | "square" | "checklist" | "trash-2";
+  name:
+    | "home"
+    | "check-square"
+    | "square"
+    | "checklist"
+    | "trash-2"
+    | "check-box";
   size?: number;
   className?: string;
   style?: {};
