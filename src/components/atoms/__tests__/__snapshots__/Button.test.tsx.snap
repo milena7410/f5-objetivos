@@ -21,7 +21,7 @@ exports[`Button Component should button not be pressable when it is disabled 1`]
       }
     }
     accessible={true}
-    className="round-lg bg-gray-500 "
+    className=" rounded-full self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -34,11 +34,15 @@ exports[`Button Component should button not be pressable when it is disabled 1`]
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
   >
-    <Text
-      className="font-bold text-white "
+    <View
+      className="  bg-gray-500 items-center justify-center rounded-full flex-1 self-stretch"
     >
-      PRIMARY
-    </Text>
+      <Text
+        className=" text-sm font-bold text-white"
+      >
+        PRIMARY
+      </Text>
+    </View>
   </View>,
   <View
     accessibilityState={
@@ -59,7 +63,7 @@ exports[`Button Component should button not be pressable when it is disabled 1`]
       }
     }
     accessible={true}
-    className="round-lg bg-gray-500 "
+    className=" rounded-full self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -72,11 +76,15 @@ exports[`Button Component should button not be pressable when it is disabled 1`]
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
   >
-    <Text
-      className="font-bold text-white "
+    <View
+      className="  bg-gray-500 items-center justify-center rounded-full flex-1 self-stretch"
     >
-      SECONDARY
-    </Text>
+      <Text
+        className=" text-sm font-bold text-white"
+      >
+        SECONDARY
+      </Text>
+    </View>
   </View>,
   <View
     accessibilityState={
@@ -97,7 +105,7 @@ exports[`Button Component should button not be pressable when it is disabled 1`]
       }
     }
     accessible={true}
-    className="round-lg bg-gray-500 "
+    className=" rounded-full self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -110,130 +118,15 @@ exports[`Button Component should button not be pressable when it is disabled 1`]
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
   >
-    <Text
-      className="font-bold text-white "
+    <View
+      className="  bg-gray-500 items-center justify-center rounded-full flex-1 self-stretch"
     >
-      DANGER
-    </Text>
-  </View>,
-]
-`;
-
-exports[`Button Component should button not be pressable when it is disabled 2`] = `
-[
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    className="round-lg bg-gray-500 "
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <Text
-      className="font-bold text-white "
-    >
-      PRIMARY
-    </Text>
-  </View>,
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    className="round-lg bg-gray-500 "
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <Text
-      className="font-bold text-white "
-    >
-      SECONDARY
-    </Text>
-  </View>,
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": true,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    className="round-lg bg-gray-500 "
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <Text
-      className="font-bold text-white "
-    >
-      DANGER
-    </Text>
+      <Text
+        className=" text-sm font-bold text-white"
+      >
+        DANGER
+      </Text>
+    </View>
   </View>,
 ]
 `;
@@ -259,7 +152,7 @@ exports[`Button Component should render button and pressable 1`] = `
       }
     }
     accessible={true}
-    className="round-lg bg-black dark:bg-white "
+    className=" rounded-full self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -272,11 +165,15 @@ exports[`Button Component should render button and pressable 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
   >
-    <Text
-      className="font-bold text-white dark:text-black "
+    <View
+      className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
     >
-      PRIMARY
-    </Text>
+      <Text
+        className=" text-sm font-bold text-white dark:text-black"
+      >
+        PRIMARY
+      </Text>
+    </View>
   </View>,
   <View
     accessibilityState={
@@ -297,7 +194,7 @@ exports[`Button Component should render button and pressable 1`] = `
       }
     }
     accessible={true}
-    className="round-lg bg-black dark:bg-white "
+    className=" rounded-full self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -310,11 +207,15 @@ exports[`Button Component should render button and pressable 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
   >
-    <Text
-      className="font-bold text-white dark:text-black "
+    <View
+      className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
     >
-      SECONDARY
-    </Text>
+      <Text
+        className=" text-sm font-bold text-white dark:text-black"
+      >
+        SECONDARY
+      </Text>
+    </View>
   </View>,
   <View
     accessibilityState={
@@ -335,7 +236,7 @@ exports[`Button Component should render button and pressable 1`] = `
       }
     }
     accessible={true}
-    className="round-lg bg-black dark:bg-white "
+    className=" rounded-full self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -348,130 +249,15 @@ exports[`Button Component should render button and pressable 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
   >
-    <Text
-      className="font-bold text-white dark:text-black "
+    <View
+      className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
     >
-      DANGER
-    </Text>
-  </View>,
-]
-`;
-
-exports[`Button Component should render button and pressable 2`] = `
-[
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    className="round-lg bg-black dark:bg-white "
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <Text
-      className="font-bold text-white dark:text-black "
-    >
-      PRIMARY
-    </Text>
-  </View>,
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    className="round-lg bg-black dark:bg-white "
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <Text
-      className="font-bold text-white dark:text-black "
-    >
-      SECONDARY
-    </Text>
-  </View>,
-  <View
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
-    className="round-lg bg-black dark:bg-white "
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <Text
-      className="font-bold text-white dark:text-black "
-    >
-      DANGER
-    </Text>
+      <Text
+        className=" text-sm font-bold text-white dark:text-black"
+      >
+        DANGER
+      </Text>
+    </View>
   </View>,
 ]
 `;

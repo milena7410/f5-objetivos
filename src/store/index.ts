@@ -14,6 +14,7 @@ import { rootReducer } from "./reducers";
 import { tasksGatewayHttp } from "../core/infra/TaskGatewayHttp";
 import { api } from "../core/infra/adapters/httpClient";
 import { TaskGateway } from "../core/infra/TaskGateway";
+import { TaskGatewayInMemory } from "~/core/infra/TaskGatewayInMemory";
 
 if (__DEV__) {
   require("~/config/reactotron");
@@ -30,7 +31,7 @@ export const store = configureStore({
   reducer: persistReducer(rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      thunk: { extraArgument: { taskGateway: tasksGatewayHttp(api) } },
+      thunk: { extraArgument: { taskGateway: TaskGatewayInMemory() } },
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },

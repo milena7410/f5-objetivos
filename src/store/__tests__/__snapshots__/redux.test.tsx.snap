@@ -2,27 +2,13 @@
 
 exports[`Redux TodoList should not render anything if the todo list is empty 1`] = `
 <View
-  style={
-    [
-      {
-        "backgroundColor": "green",
-      },
-      undefined,
-    ]
-  }
+  className=" bg-white dark:bg-black "
 />
 `;
 
 exports[`Redux TodoList should render a list of todos correctly 1`] = `
 <View
-  style={
-    [
-      {
-        "backgroundColor": "#fff",
-      },
-      undefined,
-    ]
-  }
+  className=" bg-white dark:bg-black "
 >
   <Text>
     temporibus atque distinctio omnis eius impedit tempore molestias pariatur

@@ -8,24 +8,24 @@ import {
 
 import { useColorScheme } from "nativewind";
 
-import { ThemeProvider } from "~/contexts/ThemeContext";
-import { Button } from "../ThemedButton";
 import "~/styles/global.css";
+import { ThemeProvider } from "~/contexts/ThemeContext";
+import { ThemedButton } from "../ThemedButton";
 
 describe("Button Component", () => {
   const spyToggleColorScheme = jest.spyOn(
     useColorScheme(),
     "toggleColorScheme"
   );
-  const spySetColorScheme = jest.spyOn(useColorScheme(), "setColorScheme");
+
   it("should render button and pressable", async () => {
     const callMock = jest.fn();
 
     render(
       <ThemeProvider>
-        <Button onPress={callMock} title="PRIMARY" />
-        <Button onPress={callMock} title="SECONDARY" />
-        <Button onPress={callMock} title="DANGER" />
+        <ThemedButton onPress={callMock} title="PRIMARY" />
+        <ThemedButton onPress={callMock} title="SECONDARY" />
+        <ThemedButton onPress={callMock} title="DANGER" />
       </ThemeProvider>
     );
     await waitFor(() => {
@@ -38,7 +38,6 @@ describe("Button Component", () => {
       fireEvent(primary, "press");
       fireEvent(secondary, "press");
       fireEvent(danger, "press");
-      expect(screen.toJSON()).toMatchSnapshot();
     });
     expect(callMock).toHaveBeenCalledTimes(3);
     expect(screen.toJSON()).toMatchSnapshot();
@@ -49,9 +48,9 @@ describe("Button Component", () => {
 
     render(
       <ThemeProvider>
-        <Button disabled onPress={callMock} title="PRIMARY" />
-        <Button disabled onPress={callMock} title="SECONDARY" />
-        <Button disabled onPress={callMock} title="DANGER" />
+        <ThemedButton disabled onPress={callMock} title="PRIMARY" />
+        <ThemedButton disabled onPress={callMock} title="SECONDARY" />
+        <ThemedButton disabled onPress={callMock} title="DANGER" />
       </ThemeProvider>
     );
     await waitFor(() => {
@@ -67,6 +66,5 @@ describe("Button Component", () => {
       expect(screen.toJSON()).toMatchSnapshot();
     });
     expect(callMock).not.toHaveBeenCalled();
-    expect(screen.toJSON()).toMatchSnapshot();
   });
 });
