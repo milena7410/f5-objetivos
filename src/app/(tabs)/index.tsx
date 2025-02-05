@@ -1,8 +1,8 @@
 import * as React from "react";
-import { View } from "react-native";
 
 import * as Molecules from "~/components/molecules";
 import * as Organism from "~/components/organism";
+import * as Atoms from "~/components/atoms";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { Task } from "~/core/domain/Task";
 
@@ -23,10 +23,10 @@ const App = () => {
   }, [todos.list]);
 
   return (
-    <View className="flex-1 bg-primary-50">
+    <Atoms.ThemedView className="flex-1">
       <Molecules.Welcome totalTasksTodo={todos.list.length} />
       <Organism.DraggableList list={list} setList={handleSetList} />
-    </View>
+    </Atoms.ThemedView>
   );
 };
 

@@ -2,7 +2,7 @@ import * as Atoms from "../atoms";
 
 const Header = () => {
   return (
-    <Atoms.ThemedView className="pt-safe p-4 flex-row items-center gap-4">
+    <Atoms.ThemedView className="pt-safe-offset-4 p-4  flex-row items-center gap-4">
       <Atoms.Icons
         className="size-10 text-primary"
         type="materialIcons"
