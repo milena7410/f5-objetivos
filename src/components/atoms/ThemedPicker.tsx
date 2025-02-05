@@ -17,10 +17,7 @@ const ThemedPicker = React.forwardRef<
   ThemedPickerProps
 >(({ list, onValueChange, selected }, modalRef) => {
   return (
-    <Templates.ThemeModal
-      onClose={() => onValueChange(selected)}
-      ref={modalRef}
-    >
+    <Templates.ThemeModal ref={modalRef}>
       <Atoms.ThemedView
         key={Date.now()}
         className="justify-between bg-gray-200 dark:bg-gray-50 gap-0.5"

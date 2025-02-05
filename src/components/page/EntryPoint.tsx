@@ -10,6 +10,11 @@ import { useThemeContext } from "~/contexts/ThemeContext";
 import { useLoadFont } from "~/hooks/useLoadFont";
 import { useSplashScreen } from "~/hooks/useSplashScreen";
 import * as Organism from "~/components/organism";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -22,7 +27,7 @@ const EntryPoint = () => {
   useSplashScreen(isLoaded && hasLoadedFont);
 
   return (
-    <>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ header: Organism.Header }} />
         <Stack.Screen name="+not-found" />
@@ -30,7 +35,7 @@ const EntryPoint = () => {
       <StatusBar style={colorScheme === "light" ? "dark" : "light"} />
       <Organism.TaskModal />
       <Organism.ChangeThemePicker />
-    </>
+    </ThemeProvider>
   );
 };
 

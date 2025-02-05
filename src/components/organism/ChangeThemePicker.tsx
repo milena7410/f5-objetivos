@@ -41,7 +41,7 @@ const ChangeThemePicker = () => {
   const { colorScheme, setColorScheme, openPicker, setOpenPicker } =
     useThemeContext();
   const pickerRef = React.useRef<Molecules.BottomSheetMethods>(null);
-  
+
   React.useEffect(() => {
     if (openPicker) {
       pickerRef.current?.open();

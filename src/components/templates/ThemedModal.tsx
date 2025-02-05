@@ -57,7 +57,7 @@ const ThemeModal = React.forwardRef<BottomSheetMethods, ThemeModalProps>(
         ref={bottomSheetRef}
         onChange={handleChange}
       >
-        <BottomSheetView className="pb-safe bg-white dark:bg-black">
+        <BottomSheetView className="pb-safe-or-12 bg-white dark:bg-black">
           {children}
         </BottomSheetView>
       </BottomSheet>
