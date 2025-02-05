@@ -9,7 +9,7 @@ import {
 import { useThemeContext } from "~/contexts/ThemeContext";
 import { useLoadFont } from "~/hooks/useLoadFont";
 import { useSplashScreen } from "~/hooks/useSplashScreen";
-import * as Molecules from "../molecules";
+import * as Organism from "~/components/organism";
 
 configureReanimatedLogger({
   level: ReanimatedLogLevel.warn,
@@ -24,10 +24,11 @@ const EntryPoint = () => {
   return (
     <>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ header: Molecules.Header }} />
+        <Stack.Screen name="(tabs)" options={{ header: Organism.Header }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style={colorScheme === "light" ? "dark" : "light"} />
+      <Organism.TaskModal />
     </>
   );
 };

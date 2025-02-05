@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 
 import { Task } from "~/core/domain/Task";
 import * as thunk from "./thunk";
@@ -6,6 +6,7 @@ import * as thunk from "./thunk";
 type TodoReducer = {
   state: "idle" | "pending" | "success" | "error";
   list: Task[];
+  selectedTask?: Task;
   error?: string;
 };
 
@@ -18,7 +19,17 @@ const initialState: TodoReducer = {
 const todoSlice = createSlice({
   name: "@todos",
   initialState,
-  reducers: {},
+  reducers: {
+    selectTask: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      state.selectedTask = id
+        ? state.list.find((task) => task.id === id)
+        : undefined;
+    },
+    unSelectTask: (state) => {
+      state.selectedTask = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(thunk.getTasks.fulfilled, (state, actions) => {
       state.list = actions.payload;
@@ -35,6 +46,7 @@ const todoSlice = createSlice({
       const index = state.list.findIndex((task) => id === task.id);
       state.list.splice(index, 1);
       state.state = "success";
+      state.selectedTask = undefined;
       state.error = "";
     });
     builder.addMatcher(
@@ -43,6 +55,8 @@ const todoSlice = createSlice({
         const task = actions.payload;
         const index = state.list.findIndex(({ id }) => id === task.id);
         state.list.splice(index, 1, task);
+        state.selectedTask =
+          state.selectedTask?.id === task.id ? task : state.selectedTask;
         state.state = "success";
         state.error = "";
       }
