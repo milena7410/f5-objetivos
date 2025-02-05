@@ -1,11 +1,11 @@
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { View } from "react-native";
 import DraggableFlatList, {
   RenderItemParams,
   ScaleDecorator,
 } from "react-native-draggable-flatlist";
 
+import * as Molecules from "../molecules";
 import { Task } from "~/core/domain/Task";
 import { TodoListItem } from "../molecules";
 
@@ -40,16 +40,16 @@ const DraggableList = ({ list, setList }: DraggableListProps) => {
     return null;
   }
   return (
-    <SafeAreaView className="flex-1 bg-primary dark:bg-black">
-      <DraggableFlatList
-        extraData={list.length}
-        data={list}
-        onDragEnd={({ data }) => setList(data)}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={RenderITem}
-        ItemSeparatorComponent={Separator}
-      />
-    </SafeAreaView>
+    <DraggableFlatList
+      contentContainerClassName="mt-4"
+      ListHeaderComponent={Molecules.DraggableListHeader}
+      extraData={list.length}
+      data={list}
+      onDragEnd={({ data }) => setList(data)}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={RenderITem}
+      ItemSeparatorComponent={Separator}
+    />
   );
 };
 

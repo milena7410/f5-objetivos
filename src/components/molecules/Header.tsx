@@ -1,15 +1,17 @@
-import { Icons, ThemedText, ThemedView } from "../atoms";
+import * as Atoms from "../atoms";
 
 const Header = () => {
   return (
-    <ThemedView className="pt-safe p-4 flex-row items-center gap-4">
-      <Icons
+    <Atoms.ThemedView className="pt-safe p-4 flex-row items-center gap-4">
+      <Atoms.Icons
         className="size-10 text-primary"
         type="materialIcons"
         name="check-box"
       />
-      <ThemedText className="text-4xl font-bold">ToDo List SHX</ThemedText>
-    </ThemedView>
+      <Atoms.ThemedText fontStyle="bold" className="text-4xl font-bold">
+        ToDo List SHX
+      </Atoms.ThemedText>
+    </Atoms.ThemedView>
   );
 };
 
