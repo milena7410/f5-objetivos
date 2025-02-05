@@ -41,7 +41,7 @@ const todoSlice = createSlice({
       isAnyOf(thunk.completeTask.fulfilled, thunk.undoCompletedTask.fulfilled),
       (state, actions) => {
         const task = actions.payload;
-        const index = state.list.findIndex((task) => task.id === task.id);
+        const index = state.list.findIndex(({ id }) => id === task.id);
         state.list.splice(index, 1, task);
         state.state = "success";
         state.error = "";

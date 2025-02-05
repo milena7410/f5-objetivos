@@ -2,7 +2,6 @@ import * as React from "react";
 import {
   GestureResponderEvent,
   Pressable,
-  StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -119,41 +118,55 @@ export const Swipeable = cssInterop(
   }
 );
 
-const styles = StyleSheet.create({
-  separator: {
-    width: "100%",
-    borderTopWidth: 1,
-  },
-  swipeable: {
-    height: 50,
-    backgroundColor: "papayawhip",
-    alignItems: "center",
-  },
-});
-
 const TodoListItem = ({
   isActive,
   onLongPress,
   task,
   index,
-}: TodoListItemProps) => (
-  <Swipeable item={task} startOpened={index === 0} className="flex-1 shrink-0">
-    <TouchableOpacity
-      className="flex-1 self-stretch"
-      onLongPress={onLongPress}
-      disabled={isActive}
+}: TodoListItemProps) => {
+  const { completeTask, undoCompletedTask } = useTodos();
+  function ToggleTask() {
+    if (task.completed) {
+      undoCompletedTask(task.id);
+
+      return;
+    }
+    completeTask(task.id);
+  }
+  return (
+    <Swipeable
+      item={task}
+      startOpened={index === 0}
+      className="flex-1 shrink-0"
     >
-      <Atoms.ThemedView
-        className={`h-20 shrink-0 items-center justify-center ${
-          isActive ? "bg-primary/60 dark:bg-primary/30" : ""
-        }`}
+      <TouchableOpacity
+        className="flex-1 self-stretch"
+        onLongPress={onLongPress}
+        disabled={isActive}
       >
-        <Atoms.ThemedText className="text-center text-xl">
-          {task.title}
-        </Atoms.ThemedText>
-      </Atoms.ThemedView>
-    </TouchableOpacity>
-  </Swipeable>
-);
+        <Atoms.ThemedView
+          className={`h-20 px-4 shrink-0 flex-row gap-4 items-center  ${
+            isActive ? "bg-primary/60 dark:bg-primary/30" : ""
+          }`}
+        >
+          <Pressable onPress={ToggleTask}>
+            <Atoms.Icons
+              className="size-8 text-primary-500"
+              type="feather"
+              name={task.completed ? "check-square" : "square"}
+            />
+          </Pressable>
+          <Atoms.ThemedText
+            className={`${
+              task.completed ? "line-through" : ""
+            } flex-1  text-xl`}
+          >
+            {task.title}
+          </Atoms.ThemedText>
+        </Atoms.ThemedView>
+      </TouchableOpacity>
+    </Swipeable>
+  );
+};
 
 export { TodoListItem };

@@ -95,8 +95,7 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     if (!currentTask) {
       throw new Error("not found");
     }
-    currentTask.completed = true;
-    return currentTask;
+    return taskBuilder({ ...currentTask, completed: true });
   };
 
   const undoCompletedTask = async (task: Task) => {
@@ -104,8 +103,7 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     if (!currentTask) {
       throw new Error("not found");
     }
-    currentTask.completed = false;
-    return currentTask;
+    return taskBuilder({ ...currentTask, completed: false });
   };
 
   return {

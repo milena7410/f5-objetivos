@@ -41,9 +41,8 @@ const DraggableList = ({ list, setList }: DraggableListProps) => {
   }
   return (
     <DraggableFlatList
-      contentContainerClassName="mt-4"
+      contentContainerClassName="my-4 bg-white dark:bg-black"
       ListHeaderComponent={Molecules.DraggableListHeader}
-      extraData={list.length}
       data={list}
       onDragEnd={({ data }) => setList(data)}
       keyExtractor={(item) => item.id.toString()}
