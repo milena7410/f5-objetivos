@@ -14,12 +14,13 @@ const IconTypes = {
 type CheckListIconProps = {
   type: keyof typeof IconTypes;
   name:
-    | "home"
+    | "check-box"
     | "check-square"
-    | "square"
     | "checklist"
-    | "trash-2"
-    | "check-box";
+    | "edit"
+    | "home"
+    | "square"
+    | "trash-2";
   size?: number;
   className?: string;
   style?: {};

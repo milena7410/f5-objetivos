@@ -36,7 +36,8 @@ export const TODO_LIST_MOCK = [
   {
     userId: 10,
     id: 196,
-    title: "consequuntur aut ut fugit similique",
+    title:
+      "consequuntur aut ut fugit similique dignissimos quo nobis earum saepe quis eius est sint explicabo numquam repellendus a magnam ",
     completed: true,
   },
   {
