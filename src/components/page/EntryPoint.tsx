@@ -29,6 +29,7 @@ const EntryPoint = () => {
       </Stack>
       <StatusBar style={colorScheme === "light" ? "dark" : "light"} />
       <Organism.TaskModal />
+      <Organism.ChangeThemePicker />
     </>
   );
 };

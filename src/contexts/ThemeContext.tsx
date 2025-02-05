@@ -4,17 +4,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import "~/styles/global.css";
 
-type Mode = "light" | "dark" | "system";
+export type Mode = "light" | "dark" | "system";
+
 const ThemeContext = React.createContext<{
   isLoaded: boolean;
   colorScheme: "light" | "dark";
+  openPicker: boolean;
+  setOpenPicker(value: boolean): void;
   toggleColorScheme: VoidFunction;
   setColorScheme(newColor: Mode): void;
   cssInterop: typeof cssInterop;
 }>({
   isLoaded: false,
+  openPicker: false,
   colorScheme: "light",
   toggleColorScheme: () => {},
+  setOpenPicker: () => {},
   setColorScheme: () => {},
   cssInterop: cssInterop,
 });
@@ -22,6 +27,7 @@ const ThemeContext = React.createContext<{
 export function ThemeProvider({ children }: React.PropsWithChildren) {
   const [colorMode, setColorMode] = React.useState<Mode>("system");
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const [openPicker, setOpenPicker] = React.useState(false);
   const {
     colorScheme = "light",
     setColorScheme: setNativeColorSchema,
@@ -68,9 +74,11 @@ export function ThemeProvider({ children }: React.PropsWithChildren) {
       toggleColorScheme,
       setColorScheme,
       cssInterop,
+      setOpenPicker,
       isLoaded,
+      openPicker,
     }),
-    [colorScheme, toggleColorScheme, setColorScheme, isLoaded]
+    [colorScheme, toggleColorScheme, openPicker, setColorScheme, isLoaded]
   );
 
   return (
