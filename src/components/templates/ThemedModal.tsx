@@ -4,6 +4,7 @@ import BottomSheet, {
   BottomSheetBackdropProps,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
+import { useThemeColors } from "~/hooks/useThemeColor";
 
 type BottomSheetMethods = {
   close: VoidFunction;
@@ -14,6 +15,7 @@ type ThemeModalProps = React.PropsWithChildren<{ onClose?: VoidFunction }>;
 
 const ThemeModal = React.forwardRef<BottomSheetMethods, ThemeModalProps>(
   ({ children, onClose }, ref) => {
+    const { background, text } = useThemeColors();
     const bottomSheetRef = React.useRef<BottomSheet>(null);
 
     const handleChange = React.useCallback((index: number) => {
@@ -49,11 +51,15 @@ const ThemeModal = React.forwardRef<BottomSheetMethods, ThemeModalProps>(
         enablePanDownToClose
         onClose={onClose}
         index={-1}
+        handleStyle={{ backgroundColor: background }}
+        handleIndicatorStyle={{ backgroundColor: text }}
         backdropComponent={renderBackdrop}
         ref={bottomSheetRef}
         onChange={handleChange}
       >
-        <BottomSheetView className="pb-safe">{children}</BottomSheetView>
+        <BottomSheetView className="pb-safe bg-white dark:bg-black">
+          {children}
+        </BottomSheetView>
       </BottomSheet>
     );
   }

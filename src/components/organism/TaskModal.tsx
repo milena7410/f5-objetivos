@@ -1,6 +1,6 @@
 import * as React from "react";
-import { View } from "react-native";
 
+import * as Atoms from "~/components/atoms";
 import * as Templates from "~/components/templates";
 import * as Molecules from "~/components/molecules";
 import { useTodos } from "~/store/reducers/todos/actions";
@@ -21,7 +21,7 @@ const TaskModal = () => {
   }, []);
   return (
     <Templates.ThemeModal onClose={unSelectTask} ref={modalRef}>
-      <View className="min-h-72 justify-between">
+      <Atoms.ThemedView className="min-h-72 justify-between">
         {todos.selectedTask && (
           <>
             <Molecules.TaskModalHeader onPressEdit={handleEdit} />
@@ -35,7 +35,7 @@ const TaskModal = () => {
             />
           </>
         )}
-      </View>
+      </Atoms.ThemedView>
     </Templates.ThemeModal>
   );
 };
