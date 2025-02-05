@@ -23,10 +23,14 @@ const App = () => {
   }, [todos.list]);
 
   return (
-    <Atoms.ThemedView className="flex-1">
-      <Molecules.Welcome totalTasksTodo={todos.list.length} />
-      <Organism.DraggableList list={list} setList={handleSetList} />
-    </Atoms.ThemedView>
+    <>
+      <Atoms.ThemedView className="flex-1">
+        <Molecules.Welcome totalTasksTodo={todos.list.length} />
+        <Organism.DraggableList list={list} setList={handleSetList} />
+      </Atoms.ThemedView>
+      <Organism.TaskModal />
+      <Organism.ChangeThemePicker />
+    </>
   );
 };
 

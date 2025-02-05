@@ -5,17 +5,18 @@ import BottomSheet, {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { useThemeColors } from "~/hooks/useThemeColor";
+import { Portal } from "@gorhom/portal";
 
 type BottomSheetMethods = {
   close: VoidFunction;
   open: VoidFunction;
 };
 
-type ThemeModalProps = React.PropsWithChildren<{ onClose?: VoidFunction }>;
+type ThemedModalProps = React.PropsWithChildren<{ onClose?: VoidFunction }>;
 
-const ThemeModal = React.forwardRef<BottomSheetMethods, ThemeModalProps>(
+const ThemedModal = React.forwardRef<BottomSheetMethods, ThemedModalProps>(
   ({ children, onClose }, ref) => {
-    const { background, text } = useThemeColors();
+    const { background, tint } = useThemeColors();
     const bottomSheetRef = React.useRef<BottomSheet>(null);
 
     const handleChange = React.useCallback((index: number) => {
@@ -46,23 +47,29 @@ const ThemeModal = React.forwardRef<BottomSheetMethods, ThemeModalProps>(
       []
     );
     return (
-      <BottomSheet
-        enableDynamicSizing
-        enablePanDownToClose
-        onClose={onClose}
-        index={-1}
-        handleStyle={{ backgroundColor: background }}
-        handleIndicatorStyle={{ backgroundColor: text }}
-        backdropComponent={renderBackdrop}
-        ref={bottomSheetRef}
-        onChange={handleChange}
-      >
-        <BottomSheetView className="pb-safe-or-12 bg-white dark:bg-black">
-          {children}
-        </BottomSheetView>
-      </BottomSheet>
+      <Portal hostName="ThemedModal">
+        <BottomSheet
+          enableDynamicSizing
+          enablePanDownToClose
+          onClose={onClose}
+          index={-1}
+          handleStyle={{
+            backgroundColor: background,
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+          }}
+          handleIndicatorStyle={{ backgroundColor: tint }}
+          backdropComponent={renderBackdrop}
+          ref={bottomSheetRef}
+          onChange={handleChange}
+        >
+          <BottomSheetView className="pb-safe-or-12 bg-white dark:bg-black">
+            {children}
+          </BottomSheetView>
+        </BottomSheet>
+      </Portal>
     );
   }
 );
 
-export { ThemeModal, BottomSheetMethods };
+export { ThemedModal, BottomSheetMethods };

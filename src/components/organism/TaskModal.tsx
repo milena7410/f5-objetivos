@@ -20,7 +20,7 @@ const TaskModal = () => {
     unSelectTask();
   }, []);
   return (
-    <Templates.ThemeModal onClose={unSelectTask} ref={modalRef}>
+    <Templates.ThemedModal onClose={unSelectTask} ref={modalRef}>
       <Atoms.ThemedView className="min-h-72 justify-between">
         {todos.selectedTask && (
           <>
@@ -36,7 +36,7 @@ const TaskModal = () => {
           </>
         )}
       </Atoms.ThemedView>
-    </Templates.ThemeModal>
+    </Templates.ThemedModal>
   );
 };
 

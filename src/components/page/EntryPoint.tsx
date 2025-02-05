@@ -5,6 +5,7 @@ import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
 } from "react-native-reanimated";
+import { PortalHost } from "@gorhom/portal";
 
 import { useThemeContext } from "~/contexts/ThemeContext";
 import { useLoadFont } from "~/hooks/useLoadFont";
@@ -33,8 +34,7 @@ const EntryPoint = () => {
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style={colorScheme === "light" ? "dark" : "light"} />
-      <Organism.TaskModal />
-      <Organism.ChangeThemePicker />
+      <PortalHost name="ThemedModal" />
     </ThemeProvider>
   );
 };

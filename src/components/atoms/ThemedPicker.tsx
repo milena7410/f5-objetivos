@@ -17,7 +17,7 @@ const ThemedPicker = React.forwardRef<
   ThemedPickerProps
 >(({ list, onValueChange, selected }, modalRef) => {
   return (
-    <Templates.ThemeModal ref={modalRef}>
+    <Templates.ThemedModal ref={modalRef}>
       <Atoms.ThemedView
         key={Date.now()}
         className="justify-between bg-gray-200 dark:bg-gray-50 gap-0.5"
@@ -40,7 +40,7 @@ const ThemedPicker = React.forwardRef<
           </Pressable>
         ))}
       </Atoms.ThemedView>
-    </Templates.ThemeModal>
+    </Templates.ThemedModal>
   );
 });
 

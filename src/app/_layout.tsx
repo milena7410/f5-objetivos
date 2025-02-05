@@ -2,6 +2,7 @@ import * as React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
+import { PortalProvider } from "@gorhom/portal";
 
 import "react-native-reanimated";
 
@@ -14,7 +15,9 @@ const RootLayout = () => (
     <SafeAreaProvider>
       <ThemeProvider>
         <GestureHandlerRootView>
-          <EntryPoint />
+          <PortalProvider>
+            <EntryPoint />
+          </PortalProvider>
         </GestureHandlerRootView>
       </ThemeProvider>
     </SafeAreaProvider>
