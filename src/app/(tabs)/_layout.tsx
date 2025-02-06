@@ -46,9 +46,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="example"
+        name="completed"
         options={{
-          title: "Feito",
+          title: "Feitas",
           tabBarIcon: ({ size, focused }) => (
             <Atoms.Icons
               name="check-square"
@@ -60,7 +60,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="uncompleted"
         options={{
           title: "A fazer",
           tabBarIcon: ({ size, focused }) => (

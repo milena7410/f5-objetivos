@@ -1,20 +1,21 @@
 import * as Atoms from "../atoms";
 
 type WelcomeProps = {
-  totalTasksTodo: number;
+  isEmpty: boolean;
+  title: string;
+  subtitle: string;
+  emptySubtitle: string;
 };
 
-const Welcome = ({ totalTasksTodo }: WelcomeProps) => (
+const Welcome = ({ isEmpty, title, subtitle, emptySubtitle }: WelcomeProps) => (
   <Atoms.ThemedView className="p-4 gap-4">
     <Atoms.ThemedText fontStyle="bold" className="text-2xl font-bold">
-      Welcome!
+      {title}
     </Atoms.ThemedText>
-    {totalTasksTodo ? (
-      <Atoms.ThemedText className="text-lg">
-        Você tem {totalTasksTodo} tarefas a fazer
-      </Atoms.ThemedText>
+    {!isEmpty ? (
+      <Atoms.ThemedText className="text-lg">{subtitle}</Atoms.ThemedText>
     ) : (
-      <Atoms.ThemedText>Você não tem tarefas em aberto</Atoms.ThemedText>
+      <Atoms.ThemedText className="text-lg">{emptySubtitle}</Atoms.ThemedText>
     )}
   </Atoms.ThemedView>
 );

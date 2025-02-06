@@ -6,6 +6,8 @@ import * as thunk from "./thunk";
 type TodoReducer = {
   state: "idle" | "pending" | "success" | "error";
   list: Task[];
+  completedList: Task[];
+  uncompletedList: Task[];
   selectedTask?: Task;
   error?: string;
 };
@@ -13,6 +15,8 @@ type TodoReducer = {
 const initialState: TodoReducer = {
   state: "idle",
   list: [],
+  completedList: [],
+  uncompletedList: [],
   error: "",
 };
 
@@ -33,6 +37,12 @@ const todoSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(thunk.getTasks.fulfilled, (state, actions) => {
       state.list = actions.payload;
+      state.completedList = actions.payload.filter(
+        ({ completed }) => completed
+      );
+      state.uncompletedList = actions.payload.filter(
+        ({ completed }) => !completed
+      );
       state.state = "success";
       state.error = "";
     });
@@ -55,6 +65,10 @@ const todoSlice = createSlice({
         const task = actions.payload;
         const index = state.list.findIndex(({ id }) => id === task.id);
         state.list.splice(index, 1, task);
+        state.completedList = state.list.filter(({ completed }) => completed);
+        state.uncompletedList = state.list.filter(
+          ({ completed }) => !completed
+        );
         state.selectedTask =
           state.selectedTask?.id === task.id ? task : state.selectedTask;
         state.state = "success";

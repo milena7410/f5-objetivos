@@ -6,3 +6,4 @@ export * from "./TaskModalHeader";
 export * from "./TodoListItem";
 export * from "./TodoListItemContent";
 export * from "./Welcome";
+export * from "./EmptyList";

@@ -28,7 +28,7 @@ const RenderITem = ({
 };
 
 const Separator = () => {
-  return <View className="h-m" />;
+  return <View className="h-m bg-primary-50" />;
 };
 
 type DraggableListProps = {
@@ -36,12 +36,10 @@ type DraggableListProps = {
   setList: (list: Task[]) => void;
 };
 const DraggableList = ({ list, setList }: DraggableListProps) => {
-  if (!list.length) {
-    return null;
-  }
   return (
     <DraggableFlatList
-      contentContainerClassName="mt-4 ios:pb-safe-offset-40 pb-safe-offset-32 bg-primary-50"
+      ListEmptyComponent={Molecules.EmptyList}
+      contentContainerClassName="mt-4 ios:pb-safe-offset-40 pb-safe-offset-32"
       ListHeaderComponent={Molecules.DraggableListHeader}
       data={list}
       onDragEnd={({ data }) => setList(data)}

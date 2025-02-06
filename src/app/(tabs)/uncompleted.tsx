@@ -6,9 +6,9 @@ import * as Atoms from "~/components/atoms";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { Task } from "~/core/domain/Task";
 
-const App = () => {
+const Uncompleted = () => {
   const { todos, getTodoList } = useTodos();
-  const [list, setList] = React.useState(todos.list);
+  const [list, setList] = React.useState(todos.uncompletedList);
 
   const handleSetList = (todoList: Task[]) => {
     setList(todoList);
@@ -19,20 +19,16 @@ const App = () => {
   }, []);
 
   React.useEffect(() => {
-    setList(todos.list);
-  }, [todos.list]);
+    setList(todos.uncompletedList);
+  }, [todos.uncompletedList]);
   const { length } = todos.uncompletedList;
   return (
     <>
       <Atoms.ThemedView className="flex-1">
         <Molecules.Welcome
-          title="Bem-vindo!"
+          title="Tarefas a fazer"
           subtitle={`Você tem ${length} tarefas a fazer`}
-          emptySubtitle={
-            todos.list.length
-              ? `Parabéns 🥳 você terminou todas as ${todos.list.length} tarefas`
-              : "Você não tem tarefas em aberto"
-          }
+          emptySubtitle="Você não tem tarefas em aberto"
           isEmpty={!length}
         />
         <Organism.DraggableList list={list} setList={handleSetList} />
@@ -43,4 +39,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Uncompleted;
