@@ -23,11 +23,19 @@ export const getTask = thunk(
   }
 );
 
-export const getTasks = thunk("@todos/getTasks", async (_, { extra }) => {
-  const { taskGateway } = extra!;
-  const list = useCases.getTodoList(taskGateway);
-  return list;
-});
+export const getTasks = thunk(
+  "@todos/getTasks",
+  async (_, { extra, getState }) => {
+    const { isFirstEntry } = getState().todos;
+    // bypass
+    if (!isFirstEntry) {
+      return [];
+    }
+    const { taskGateway } = extra!;
+    const list = useCases.getTodoList(taskGateway);
+    return list;
+  }
+);
 
 export const createTask = thunk(
   "@todos/createTask",

@@ -5,6 +5,7 @@ import * as thunk from "./thunk";
 
 type TodoReducer = {
   state: "idle" | "pending" | "success" | "error";
+  isFirstEntry: boolean;
   list: Task[];
   completedList: Task[];
   uncompletedList: Task[];
@@ -13,6 +14,7 @@ type TodoReducer = {
 };
 
 const initialState: TodoReducer = {
+  isFirstEntry: true,
   state: "idle",
   list: [],
   completedList: [],
@@ -56,12 +58,17 @@ const todoSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(thunk.getTasks.fulfilled, (state, actions) => {
-      fillCompletedAndUncompletedTasks(state, actions.payload);
       state.state = "success";
       state.error = "";
+      // bypass
+      if (state.isFirstEntry) {
+        state.isFirstEntry = false;
+        fillCompletedAndUncompletedTasks(state, actions.payload);
+      }
     });
     builder.addCase(thunk.createTask.fulfilled, (state, actions) => {
       state.list = [actions.payload, ...state.list];
+      fillCompletedAndUncompletedTasks(state, state.list);
       state.state = "success";
       state.error = "";
     });
