@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <Text
-  className="  urbanist  text-txt-primary dark:text-txt-dark"
+  className=" font-urbanist  text-txt-primary dark:text-txt-dark"
 >
   Snapshot test!
 </Text>

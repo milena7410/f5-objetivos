@@ -100,4 +100,10 @@ describe("Todo Gateway", () => {
       message: "not found",
     });
   });
+
+  it("should delete all", async () => {
+    await useCases.deleteAllTasks(taskGateway);
+    const all = await useCases.getTodoList(taskGateway);
+    expect(all.length).toBe(0);
+  });
 });

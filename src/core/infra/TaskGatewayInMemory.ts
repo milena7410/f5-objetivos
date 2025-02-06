@@ -114,6 +114,10 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     return taskEntity;
   };
 
+  const deleteAllTasks = async () => {
+    TODO_LIST.length = 0;
+  };
+
   return {
     getTasks,
     createTask,
@@ -121,5 +125,6 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     deleteTask,
     completeTask,
     undoCompletedTask,
+    deleteAllTasks,
   };
 };

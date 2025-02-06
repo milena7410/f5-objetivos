@@ -39,6 +39,10 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     return taskBuilder(updatedTask);
   };
 
+  const deleteAllTasks = async () => {
+    return await httpClient.delete<Task>(`/todos/all`);
+  };
+
   return {
     getTasks,
     createTask,
@@ -46,5 +50,6 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     deleteTask,
     completeTask,
     undoCompletedTask,
+    deleteAllTasks,
   };
 }
