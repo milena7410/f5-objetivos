@@ -57,7 +57,7 @@ const TodoListItemContent = ({
         <Atoms.Icons
           name="drag-handle"
           type="materialIcons"
-          className="size-8 pl-4 text-primary/20"
+          className="size-8 pl-4 text-primary-500/40"
         />
       )}
     </Atoms.ThemedView>
