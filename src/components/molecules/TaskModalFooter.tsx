@@ -12,21 +12,19 @@ const TaskModalFooter = ({
   onDelete,
   task,
 }: TaskModalFooterProps) => (
-  <Atoms.ThemedView className="gap-4 ">
-    <Atoms.ThemedView className="flex-row gap-4 justify-center">
-      <Atoms.ThemedButton
-        variant="danger"
-        onPress={() => {
-          onDelete(task.id);
-        }}
-        title="Remover"
-      />
-      <Atoms.ThemedButton
-        variant="secondary"
-        onPress={onCancel}
-        title="Cancelar"
-      />
-    </Atoms.ThemedView>
+  <Atoms.ThemedView className="flex-row gap-4 justify-center">
+    <Atoms.ThemedButton
+      variant="danger"
+      onPress={() => {
+        onDelete(task.id);
+      }}
+      title="Remover"
+    />
+    <Atoms.ThemedButton
+      variant="secondary"
+      onPress={onCancel}
+      title="Cancelar"
+    />
   </Atoms.ThemedView>
 );
 

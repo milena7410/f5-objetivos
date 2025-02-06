@@ -18,6 +18,10 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        tabBarLabelStyle: {
+          fontFamily: "urbanist",
+          fontSize: 12,
+        },
         tabBarActiveTintColor: color.tint,
         headerShown: false,
         tabBarButton: HapticTab,

@@ -18,7 +18,6 @@ const CreateTask = ({ task, handleTask, handleCancel }: CreateTaskProps) => {
 
   return (
     <Atoms.ThemedView className=" gap-10 p-4 justify-between">
-      <Atoms.ThemedText>Task</Atoms.ThemedText>
       <BottomSheetTextInput
         className="border border-primary-500 bg-blue-50 font-urbanist text text-xl rounded-lg p-4"
         placeholderClassName="font-urbanist"

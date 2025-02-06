@@ -38,7 +38,9 @@ const TaskModal = () => {
         <Atoms.ThemedView className="min-h-72 justify-between">
           {todos.selectedTask && (
             <>
-              <Molecules.TaskModalHeader onPressEdit={handleEdit} />
+              <Molecules.ModalHeader title="Detalhes">
+                <Molecules.TaskModalHeader onPressEdit={handleEdit} />
+              </Molecules.ModalHeader>
               <Molecules.TodoListItemContent task={todos.selectedTask} />
               <Molecules.TaskModalFooter
                 onDelete={(id) => {

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Pressable } from "react-native";
 
 import * as Atoms from "~/components/atoms";
+import * as Molecules from "~/components/molecules";
 import * as Templates from "~/components/templates";
 
 type Item = { label: string; value: string; Icon?: React.FC };
@@ -19,6 +20,7 @@ const ThemedPicker = React.forwardRef<
 >(({ list, onValueChange, onClose, selected }, modalRef) => {
   return (
     <Templates.ThemedModal onClose={onClose} ref={modalRef}>
+      <Molecules.ModalHeader title="Escolha entre:" />
       <Atoms.ThemedView className="justify-between bg-gray-200 dark:bg-gray-50 gap-0.5">
         {list.map(({ value, label, Icon }) => (
           <Pressable

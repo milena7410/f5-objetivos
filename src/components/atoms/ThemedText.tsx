@@ -8,10 +8,10 @@ export type ThemedTextProps = TextProps & {
 };
 
 const fontStyles = {
-  normal: "urbanist",
-  italic: "urbanist-italic",
-  semibold: "urbanist-semibold",
-  bold: "urbanist-bold",
+  normal: "font-urbanist",
+  italic: "font-urbanist-italic",
+  semibold: "font-urbanist-semibold",
+  bold: "font-urbanist-bold",
 };
 
 const ThemedText = ({
@@ -22,7 +22,7 @@ const ThemedText = ({
 }: ThemedTextProps) => {
   return (
     <Text
-      className={`${className}  ${fontStyles[fontStyle]}  text-txt-primary dark:text-txt-dark`}
+      className={`${className} ${fontStyles[fontStyle]}  text-txt-primary dark:text-txt-dark`}
       {...rest}
     />
   );

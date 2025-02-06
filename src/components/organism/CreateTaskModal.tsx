@@ -38,6 +38,9 @@ const CreateTaskModal = ({ isEditing, setIsEditing }: CreateTaskModalProps) => {
   const onClose = React.useCallback(() => handleClose(), []);
   return (
     <Templates.ThemedModal onClose={onClose} ref={modalRef}>
+      <Molecules.ModalHeader
+        title={todos.selectedTask?.id ? "Editar tarefa" : "Criar tarefa"}
+      />
       <Molecules.CreateTask
         task={todos.selectedTask}
         handleCancel={handleClose}

@@ -5,13 +5,15 @@ import * as Atoms from "../atoms";
 type TaskModalHeaderProps = { onPressEdit: VoidFunction };
 
 const TaskModalHeader = ({ onPressEdit }: TaskModalHeaderProps) => (
-  <Pressable onPress={onPressEdit}>
-    <Atoms.Icons
-      className="self-end size-8 text-primary-500 m-4 mb-0"
-      type="feather"
-      name="edit"
-    />
-  </Pressable>
+  <Atoms.ThemedView className="flex-1">
+    <Pressable className="self-end p-1" onPress={onPressEdit}>
+      <Atoms.Icons
+        className="size-8 text-primary-500"
+        type="feather"
+        name="edit"
+      />
+    </Pressable>
+  </Atoms.ThemedView>
 );
 
 export { TaskModalHeader };
