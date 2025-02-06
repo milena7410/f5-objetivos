@@ -11,17 +11,18 @@ const TaskModal = () => {
   const { todos, deleteTask, unSelectTask } = useTodos();
   const [openEditModal, setOpenEditModal] = React.useState(false);
   React.useEffect(() => {
-    if (todos.selectedTask) {
+    if (todos.selectedTask?.id) {
       modalRef.current?.open();
       return;
     }
     modalRef.current?.close();
-  }, [todos.selectedTask]);
+  }, [todos.selectedTask?.id]);
 
   const handleEdit = React.useCallback(() => {
     setOpenEditModal(true);
     modalRef.current?.close();
   }, []);
+
   const editFinished = () => {
     setOpenEditModal(false);
     modalRef.current?.open();
@@ -50,6 +51,7 @@ const TaskModal = () => {
           )}
         </Atoms.ThemedView>
       </Templates.ThemedModal>
+
       <CreateTaskModal setIsEditing={editFinished} isEditing={openEditModal} />
     </>
   );

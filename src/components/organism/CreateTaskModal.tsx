@@ -21,7 +21,7 @@ const CreateTaskModal = ({ isEditing, setIsEditing }: CreateTaskModalProps) => {
   }, [isEditing]);
 
   const handleCreateTask = (task: Partial<Task>) => {
-    if (isEditing) {
+    if (todos.selectedTask?.id) {
       handleClose();
       return;
     }
@@ -37,20 +37,13 @@ const CreateTaskModal = ({ isEditing, setIsEditing }: CreateTaskModalProps) => {
   };
   const onClose = React.useCallback(() => handleClose(), []);
   return (
-    <>
-      <Atoms.ThemedButton
-        variant="secondary"
-        title="Criar Tarefa"
-        onPress={() => modalRef.current?.open()}
+    <Templates.ThemedModal onClose={onClose} ref={modalRef}>
+      <Molecules.CreateTask
+        task={todos.selectedTask}
+        handleCancel={handleClose}
+        handleTask={handleCreateTask}
       />
-      <Templates.ThemedModal onClose={onClose} ref={modalRef}>
-        <Molecules.CreateTask
-          task={todos.selectedTask}
-          handleCancel={handleClose}
-          handleTask={handleCreateTask}
-        />
-      </Templates.ThemedModal>
-    </>
+    </Templates.ThemedModal>
   );
 };
 

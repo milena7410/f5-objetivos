@@ -42,7 +42,7 @@ const ThemedModal = React.forwardRef<BottomSheetMethods, ThemedModalProps>(
           {...props}
           disappearsOnIndex={-1}
           appearsOnIndex={0}
-          onPress={handleClose}
+          onPress={onClose}
         />
       ),
       []
@@ -52,13 +52,13 @@ const ThemedModal = React.forwardRef<BottomSheetMethods, ThemedModalProps>(
         <BottomSheet
           enableDynamicSizing
           enablePanDownToClose
-          onClose={onClose}
           index={-1}
           handleStyle={{
             backgroundColor: background,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
           }}
+          android_keyboardInputMode="adjustResize"
           handleIndicatorStyle={{ backgroundColor: tint }}
           backdropComponent={renderBackdrop}
           ref={bottomSheetRef}
