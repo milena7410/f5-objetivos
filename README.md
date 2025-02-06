@@ -1,50 +1,165 @@
-# Welcome to your Expo app 👋
+# ToDo List SHX
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Documentação
 
-## Get started
+- [Sobre](#sobre)
+- [Estrutura](#estrutura-de-pastas-de-src)
+- [Tecnologias](#tecnologias)
+- [Instalação](#instalação)
 
-1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+## Sobre
 
-2. Start the app
+Este projeto foi desenvolvido como teste para vaga de front-end da empresa SHX com os seguintes objetivos:
 
-   ```bash
-    npx expo start
-   ```
+### Avaliar habilidades fundamentais de um desenvolvedor em React Native, como:
 
-In the output, you'll find options to open the app in a
+* Expo
+* Typescript
+* Conhecimento de JSX e componentes.
+* Uso de hooks (useState, useEffect, etc.)
+* Gerenciamento de estado simples.
+* Estilização e layout.
+* Integração com APIs externas.
+ 
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Descrição do Teste:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Criação de um aplicativo simples utilizando expo de lista de tarefas (To-Do List) com as seguintes funcionalidades:
 
-## Get a fresh project
+- ✅ Adicionar tarefas: Um campo de texto para inserir uma nova tarefa e um botão para adicionar à lista.
+- ✅ Exibir tarefas: Uma lista dinâmica que mostra as tarefas adicionadas.
+- ✅ Marcar como concluída: Opção para marcar/desmarcar uma tarefa como concluída.
+- ✅ Remover tarefas: Botão para excluir uma tarefa.
+- ✅ Persistência de dados: Salvar e carregar as tarefas usando AsyncStorage.
+- ✅ Estilização básica: Interface agradável e funcional.
+- ✅ Consumo de API: Integrar com uma API pública como a JSONPlaceholder (https://jsonplaceholder.typicode.com/) para exibir uma lista inicial de tarefas.
 
-When you're ready, run:
+ ### Extras
+#### Core
+- ✅ Redux para gerenciamento de estado e persistência do AsyncStorage
+- ✅ Uso de clean arch com injeção de independencia
+- ✅ Criado HttpClient para isolar a implementação do axios
+- ✅ Testes unitários no core da aplicação e redux
+#### View
+- ✅ Lista ordenável com drag and drop
+- ✅ Uso de swippeale dentro da lista
+- ✅ Uso de modais do tipo bottomSheet
+- ✅ Dark Mode
+- ✅ Nativewind para estilização com tailwindcss
+ 
 
-```bash
-npm run reset-project
+## Estrutura de pastas de SRC
+
+```
+.
+├── @types
+├── app
+├── assets
+├── components
+│   ├── atoms
+│   ├── molecules
+│   ├── organism
+│   ├── page
+│   ├── screen
+│   ├── templates
+│   └── ui
+├── config
+├── constants
+├── contexts
+├── core
+│   ├── __tests__
+│   ├── application
+│   │   └── use-cases
+│   ├── domain
+│   └── infra
+│       └── adapters
+├── hooks
+├── store
+│   ├── __mocks__
+│   ├── __tests__
+│   ├── hooks
+│   └── reducers
+│       └── todos
+└── styles
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Tecnologias
 
-## Learn more
+| Nome    | Versão  | Objetivo                           |
+| ------- | ------- | ---------------------------------- |
+| Node.js | 22.5.1  | Interpretador Javascript           |
+| NPM     | 10.8.2  | Gerenciar dependências             |
+| Expo    | 52.0.30 | Framework para dispositivos móveis |
 
-To learn more about developing your project with Expo, look at the following resources:
+## Versão mínima
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+| Nome    | Versao |
+| ------- | ------ |
+| IOS     | 15.1+  |
+| Android | 6+     |
 
-## Join the community
+## Instalação
 
-Join our community of developers creating universal apps.
+### No Desktop
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Clone o projeto com HTTPS ou SSH
+HTTPS
+```bash
+$ git clone https://github.com/oliveiragit/react-native-todo-list.git
+```
+SSH
+```bash
+$ git clone git@github.com:oliveiragit/react-native-todo-list.git
+```
+
+2. Abra a pasta
+```bash
+$ cd react-native-todo-list
+```
+
+Instale as dependências no projeto.
+
+```bash
+$ npm install
+```
+
+### No dispositivo
+
+1. Instale o aplicativo **Expo Go** no seu aparelho através das lojas:
+
+Android
+
+- [Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US)
+
+IOS
+
+- [App Store](https://apps.apple.com/br/app/expo-go/id982107779)
+
+2. Mantenha-o conectado na mesma rede do computador.
+
+### Iniciar o projeto
+
+```bash
+$ npm start
+```
+
+Aparecerá no terminal um QR code que deverá ser escaneado através do App `Expo Go` no dispositivo físico.
+
+### Iniciar o projeto em Simulador IOS ou Emulador android
+
+
+```bash
+$ npm start
+```
+Pressione a tecla `i` para abrir o simulador do IOS (iPhone), funciona apenas no MacOS com o `Xcode` instalado, ou pressione a tecla `a` para abrir um Simulador Android, que também só funciona com o `Android Studio`(Windows, Linux ou Mac) pré instalado na máquina .
+
+### Resolução de problemas:
+
+1. Caso tenha inicializado o projeto sem o .env ou necessitou modifica-lo em algum momento.
+
+```bash
+$ npx expo -c
+```
+
+
