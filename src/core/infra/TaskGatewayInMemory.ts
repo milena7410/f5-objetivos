@@ -66,13 +66,13 @@ export const TODO_LIST_MOCK = [
   },
 ];
 export const TaskGatewayInMemory = (): TaskGateway => {
-  const TODO_LIST: Task[] = JSON.parse(JSON.stringify(TODO_LIST_MOCK));
+  let TODO_LIST: Task[] = JSON.parse(JSON.stringify(TODO_LIST_MOCK));
 
   const getTasks = async (): Promise<Task[]> => TODO_LIST.map(taskBuilder);
 
   const createTask = async (task: TaskDTO): Promise<Task> => {
     const newTask = taskBuilder(task);
-    TODO_LIST.splice(0, 0, newTask);
+    TODO_LIST = [newTask, ...TODO_LIST];
     return newTask;
   };
 
@@ -121,7 +121,7 @@ export const TaskGatewayInMemory = (): TaskGateway => {
   };
 
   const deleteAllTasks = async () => {
-    TODO_LIST.length = 0;
+    TODO_LIST = [];
     return TODO_LIST;
   };
 

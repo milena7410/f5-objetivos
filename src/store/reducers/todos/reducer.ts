@@ -100,7 +100,10 @@ const todoSlice = createSlice({
         state.state = "success";
         state.error = "";
         // bypass
-        if (state.isFirstEntry || actions.type !== "@todos/deleteAllTasks") {
+        if (
+          state.isFirstEntry ||
+          actions.type === thunk.deleteAllTasks.fulfilled.toString()
+        ) {
           state.isFirstEntry = false;
           fillCompletedAndUncompletedTasks(state, actions.payload);
         }
