@@ -3,6 +3,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { PortalProvider } from "@gorhom/portal";
+import ToastManager from "toastify-react-native";
 
 import "react-native-reanimated";
 
@@ -16,6 +17,7 @@ const RootLayout = () => (
       <ThemeProvider>
         <GestureHandlerRootView>
           <PortalProvider>
+            <ToastManager />
             <EntryPoint />
           </PortalProvider>
         </GestureHandlerRootView>
