@@ -39,6 +39,7 @@ module.exports = {
         "txt-info": "#1F618D",
         "txt-warning": "#A9C3D5",
         "txt-danger": "#F0F9FF",
+        black: "#161616",
       },
     },
   },

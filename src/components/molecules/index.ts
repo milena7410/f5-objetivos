@@ -7,3 +7,4 @@ export * from "./TodoListItem";
 export * from "./TodoListItemContent";
 export * from "./Welcome";
 export * from "./EmptyList";
+export * from "./CreateTask";

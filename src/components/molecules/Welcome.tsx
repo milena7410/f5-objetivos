@@ -1,5 +1,5 @@
 import * as Atoms from "../atoms";
-
+import * as Organism from "../organism";
 type WelcomeProps = {
   isEmpty: boolean;
   title: string;
@@ -8,15 +8,16 @@ type WelcomeProps = {
 };
 
 const Welcome = ({ isEmpty, title, subtitle, emptySubtitle }: WelcomeProps) => (
-  <Atoms.ThemedView className="p-4 gap-4">
+  <Atoms.ThemedView className=" p-4 gap-4">
     <Atoms.ThemedText fontStyle="bold" className="text-2xl font-bold">
       {title}
     </Atoms.ThemedText>
-    {!isEmpty ? (
-      <Atoms.ThemedText className="text-lg">{subtitle}</Atoms.ThemedText>
-    ) : (
-      <Atoms.ThemedText className="text-lg">{emptySubtitle}</Atoms.ThemedText>
-    )}
+    <Atoms.ThemedView className="gap-2 flex-row items-center">
+      <Atoms.ThemedText className="flex-1 text-lg">
+        {!isEmpty ? subtitle : emptySubtitle}
+      </Atoms.ThemedText>
+      <Organism.CreateTaskModal />
+    </Atoms.ThemedView>
   </Atoms.ThemedView>
 );
 

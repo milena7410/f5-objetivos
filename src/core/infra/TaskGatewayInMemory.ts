@@ -92,19 +92,25 @@ export const TaskGatewayInMemory = (): TaskGateway => {
   };
 
   const completeTask = async (task: Task) => {
-    const currentTask = TODO_LIST.find((t) => t.id === task.id);
+    const index = TODO_LIST.findIndex((t) => t.id === task.id);
+    const currentTask = TODO_LIST[index];
     if (!currentTask) {
       throw new Error("not found");
     }
-    return taskBuilder({ ...currentTask, completed: true });
+    const taskEntity = taskBuilder({ ...currentTask, completed: true });
+    TODO_LIST.splice(index, 0, taskEntity);
+    return taskEntity;
   };
 
   const undoCompletedTask = async (task: Task) => {
-    const currentTask = TODO_LIST.find((t) => t.id === task.id);
+    const index = TODO_LIST.findIndex((t) => t.id === task.id);
+    const currentTask = TODO_LIST[index];
     if (!currentTask) {
       throw new Error("not found");
     }
-    return taskBuilder({ ...currentTask, completed: false });
+    const taskEntity = taskBuilder({ ...currentTask, completed: false });
+    TODO_LIST.splice(index, 0, taskEntity);
+    return taskEntity;
   };
 
   return {

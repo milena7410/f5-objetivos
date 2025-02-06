@@ -23,19 +23,15 @@ const Completed = () => {
   }, [todos.completedList]);
   const { length } = todos.completedList;
   return (
-    <>
-      <Atoms.ThemedView className="flex-1">
-        <Molecules.Welcome
-          title="Tarefas a fazer"
-          subtitle={`Você terminou ${length} tarefas`}
-          emptySubtitle="Você ainda não terminou nenhuma tarefa"
-          isEmpty={!length}
-        />
-        <Organism.DraggableList list={list} setList={handleSetList} />
-      </Atoms.ThemedView>
-      <Organism.TaskModal />
-      <Organism.ChangeThemePicker />
-    </>
+    <Atoms.ThemedView className="flex-1">
+      <Molecules.Welcome
+        title="Tarefas a fazer"
+        subtitle={`Você terminou ${length} tarefas`}
+        emptySubtitle="Você ainda não terminou nenhuma tarefa"
+        isEmpty={!length}
+      />
+      <Organism.DraggableList list={list} setList={handleSetList} />
+    </Atoms.ThemedView>
   );
 };
 

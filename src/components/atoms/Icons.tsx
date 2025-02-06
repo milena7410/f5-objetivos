@@ -19,6 +19,7 @@ type CheckListIconProps = {
     | "check-box"
     | "check-square"
     | "checklist"
+    | "drag-handle"
     | "edit"
     | "home"
     | "moon"

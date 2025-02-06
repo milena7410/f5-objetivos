@@ -5,6 +5,7 @@ import { Task } from "~/core/domain/Task";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { TodoListItemContent } from "./TodoListItemContent";
 import * as Molecules from "../molecules";
+import * as Atoms from "../atoms";
 
 type TodoListItemProps = {
   onLongPress?: (event: GestureResponderEvent) => void;
@@ -29,7 +30,7 @@ const TodoListItem = ({
     >
       <TouchableOpacity
         onPress={() => selectTask(task.id)}
-        className="flex-1 self-stretch"
+        className="flex-row items-center self-stretch"
         onLongPress={onLongPress}
         disabled={isActive}
       >

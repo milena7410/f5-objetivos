@@ -4,8 +4,9 @@ import BottomSheet, {
   BottomSheetBackdropProps,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { useThemeColors } from "~/hooks/useThemeColor";
 import { Portal } from "@gorhom/portal";
+
+import { useThemeColors } from "~/hooks/useThemeColor";
 
 type BottomSheetMethods = {
   close: VoidFunction;
@@ -63,7 +64,10 @@ const ThemedModal = React.forwardRef<BottomSheetMethods, ThemedModalProps>(
           ref={bottomSheetRef}
           onChange={handleChange}
         >
-          <BottomSheetView className="pb-safe-or-12 bg-white dark:bg-black">
+          <BottomSheetView
+            key={Date.now()}
+            className="pb-safe-or-12 bg-white dark:bg-black"
+          >
             {children}
           </BottomSheetView>
         </BottomSheet>

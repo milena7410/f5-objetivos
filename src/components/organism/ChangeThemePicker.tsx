@@ -54,9 +54,13 @@ const ChangeThemePicker = () => {
     setColorScheme(mode as Mode);
     setOpenPicker(false);
   };
+  const onClose = React.useCallback(() => {
+    setOpenPicker(false);
+  }, []);
 
   return (
     <ThemedPicker
+      onClose={onClose}
       ref={pickerRef}
       onValueChange={handleChange}
       list={modes}

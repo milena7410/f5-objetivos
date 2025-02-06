@@ -57,8 +57,10 @@ describe("Todo Gateway", () => {
 
   it("should mark task as completed", async () => {
     const task = FIRST_TASK;
-    await useCases.completeTask(taskGateway, task);
+    const taskd = await useCases.completeTask(taskGateway, task);
+    console.log({ taskd });
     const completedTask = await useCases.getTask(taskGateway, task.id);
+    console.log("COMPLETE", { completedTask });
     expect(completedTask.completed).toBe(true);
   });
 

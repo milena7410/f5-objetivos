@@ -19,6 +19,25 @@ const initialState: TodoReducer = {
   uncompletedList: [],
   error: "",
 };
+const fillCompletedAndUncompletedTasks = (
+  state: TodoReducer,
+  newList: Task[]
+) => {
+  state.list = newList;
+  const [completed, uncompleted] = state.list.reduce<Task[][]>(
+    (acc, task) => {
+      if (task.completed) {
+        acc[0].push(task);
+        return acc;
+      }
+      acc[1].push(task);
+      return acc;
+    },
+    [[], []]
+  );
+  state.completedList = completed;
+  state.uncompletedList = uncompleted;
+};
 
 const todoSlice = createSlice({
   name: "@todos",
@@ -34,20 +53,15 @@ const todoSlice = createSlice({
       state.selectedTask = undefined;
     },
   },
+
   extraReducers: (builder) => {
     builder.addCase(thunk.getTasks.fulfilled, (state, actions) => {
-      state.list = actions.payload;
-      state.completedList = actions.payload.filter(
-        ({ completed }) => completed
-      );
-      state.uncompletedList = actions.payload.filter(
-        ({ completed }) => !completed
-      );
+      fillCompletedAndUncompletedTasks(state, actions.payload);
       state.state = "success";
       state.error = "";
     });
     builder.addCase(thunk.createTask.fulfilled, (state, actions) => {
-      state.list = [...state.list, actions.payload];
+      state.list = [actions.payload, ...state.list];
       state.state = "success";
       state.error = "";
     });
@@ -55,6 +69,7 @@ const todoSlice = createSlice({
       const id = actions.payload;
       const index = state.list.findIndex((task) => id === task.id);
       state.list.splice(index, 1);
+      fillCompletedAndUncompletedTasks(state, state.list);
       state.state = "success";
       state.selectedTask = undefined;
       state.error = "";
@@ -65,10 +80,7 @@ const todoSlice = createSlice({
         const task = actions.payload;
         const index = state.list.findIndex(({ id }) => id === task.id);
         state.list.splice(index, 1, task);
-        state.completedList = state.list.filter(({ completed }) => completed);
-        state.uncompletedList = state.list.filter(
-          ({ completed }) => !completed
-        );
+        fillCompletedAndUncompletedTasks(state, state.list);
         state.selectedTask =
           state.selectedTask?.id === task.id ? task : state.selectedTask;
         state.state = "success";

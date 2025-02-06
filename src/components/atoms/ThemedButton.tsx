@@ -25,7 +25,8 @@ const ThemedButton = ({
   const variantButtonStyle: Variant = {
     enabled: {
       primary: " bg-black dark:bg-white",
-      secondary: "border border-black bg-white dark:bg-black dark:border-white",
+      secondary:
+        "border border-primary-500 bg-white dark:bg-black dark:border-white",
       danger: "bg-danger",
     },
     disabled: {
@@ -59,7 +60,7 @@ const ThemedButton = ({
         className={`${className}  ${variantButtonStyle[disabledProp][variant]} items-center justify-center rounded-full flex-1 self-stretch`}
       >
         <Text
-          className={`${textClassname} text-sm font-bold ${textStyle[disabledProp][variant]}`}
+          className={`${textClassname} font-urbanist font-bold ${textStyle[disabledProp][variant]}`}
         >
           {title}
         </Text>

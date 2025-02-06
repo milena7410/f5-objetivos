@@ -53,6 +53,13 @@ const TodoListItemContent = ({
       >
         {task.title}
       </Atoms.ThemedText>
+      {isActive !== undefined && (
+        <Atoms.Icons
+          name="drag-handle"
+          type="materialIcons"
+          className="size-8 pl-4 text-primary/20"
+        />
+      )}
     </Atoms.ThemedView>
   );
 };

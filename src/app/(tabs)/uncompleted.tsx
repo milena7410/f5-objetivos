@@ -23,19 +23,15 @@ const Uncompleted = () => {
   }, [todos.uncompletedList]);
   const { length } = todos.uncompletedList;
   return (
-    <>
-      <Atoms.ThemedView className="flex-1">
-        <Molecules.Welcome
-          title="Tarefas a fazer"
-          subtitle={`Você tem ${length} tarefas a fazer`}
-          emptySubtitle="Você não tem tarefas em aberto"
-          isEmpty={!length}
-        />
-        <Organism.DraggableList list={list} setList={handleSetList} />
-      </Atoms.ThemedView>
-      <Organism.TaskModal />
-      <Organism.ChangeThemePicker />
-    </>
+    <Atoms.ThemedView className="flex-1">
+      <Molecules.Welcome
+        title="Tarefas a fazer"
+        subtitle={`Você tem ${length} tarefas a fazer`}
+        emptySubtitle="Você não tem tarefas em aberto"
+        isEmpty={!length}
+      />
+      <Organism.DraggableList list={list} setList={handleSetList} />
+    </Atoms.ThemedView>
   );
 };
 

@@ -8,6 +8,7 @@ type Item = { label: string; value: string; Icon?: React.FC };
 
 type ThemedPickerProps = {
   list: Item[];
+  onClose: VoidFunction;
   onValueChange: (itemValue: string) => void;
   selected: string;
 };
@@ -15,13 +16,10 @@ type ThemedPickerProps = {
 const ThemedPicker = React.forwardRef<
   Templates.BottomSheetMethods,
   ThemedPickerProps
->(({ list, onValueChange, selected }, modalRef) => {
+>(({ list, onValueChange, onClose, selected }, modalRef) => {
   return (
-    <Templates.ThemedModal ref={modalRef}>
-      <Atoms.ThemedView
-        key={Date.now()}
-        className="justify-between bg-gray-200 dark:bg-gray-50 gap-0.5"
-      >
+    <Templates.ThemedModal onClose={onClose} ref={modalRef}>
+      <Atoms.ThemedView className="justify-between bg-gray-200 dark:bg-gray-50 gap-0.5">
         {list.map(({ value, label, Icon }) => (
           <Pressable
             key={value}
