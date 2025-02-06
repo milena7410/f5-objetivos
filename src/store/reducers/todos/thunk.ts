@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as useCases from "~/core/application/use-cases/";
 
-import type { TaskDTO } from "~/core/domain/Task";
+import type { Task, TaskDTO } from "~/core/domain/Task";
 import { TaskGateway } from "~/core/infra/TaskGateway";
 import { RootState } from "~/store";
 
@@ -42,6 +42,15 @@ export const createTask = thunk(
   async (task: TaskDTO, { extra }) => {
     const { taskGateway } = extra;
     const newTask = useCases.createTask(taskGateway, task);
+    return newTask;
+  }
+);
+
+export const editTask = thunk(
+  "@todos/editTask",
+  async (task: Task, { extra }) => {
+    const { taskGateway } = extra;
+    const newTask = useCases.editTask(taskGateway, task);
     return newTask;
   }
 );

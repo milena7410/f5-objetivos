@@ -9,6 +9,8 @@ import { Text } from "react-native";
 import * as Atoms from "~/components/atoms";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { useThemeContext } from "~/contexts/ThemeContext";
+import { Task } from "~/core/domain/Task";
+import { editTask } from "~/core/application/use-cases";
 
 export const GetTodoListEmpty = () => {
   const { todos } = useTodos();
@@ -104,11 +106,34 @@ export const CompleteTask = ({
   const task = todos.list.find((task) => task.id === id);
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Atoms.ThemedView>
-        <Text>{task?.completed ? "COMPLETED" : "NOT_COMPLETED"}</Text>
-        {!!todos.error && <Text>{todos.error}</Text>}
-      </Atoms.ThemedView>
-    </ThemeProvider>
+    <Atoms.ThemedView>
+      <Text>{task?.completed ? "COMPLETED" : "NOT_COMPLETED"}</Text>
+      {!!todos.error && <Text>{todos.error}</Text>}
+    </Atoms.ThemedView>
+  );
+};
+
+export const EditTask = ({ id, title }: { id: number; title: string }) => {
+  const { getTodoList, todos, editTask } = useTodos();
+
+  React.useEffect(() => {
+    getTodoList();
+  }, []);
+
+  const { colorScheme } = useThemeContext();
+  const task = todos.list.find((task) => task.id === id);
+
+  if (!task) {
+    return null;
+  }
+  return (
+    <Atoms.ThemedView>
+      <Text>{task?.title}</Text>
+      <Atoms.ThemedButton
+        title="EDIT"
+        onPress={() => editTask({ ...task, title })}
+      />
+      {!!todos.error && <Text>{todos.error}</Text>}
+    </Atoms.ThemedView>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as thunk from "./thunk";
-import { TaskDTO } from "~/core/domain/Task";
+import { Task, TaskDTO } from "~/core/domain/Task";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { actions } from "./reducer";
 
@@ -21,10 +21,16 @@ export const useTodos = () => {
     []
   );
 
+  const editTask = React.useCallback(
+    (task: Task) => dispatch(thunk.editTask(task)),
+    []
+  );
+
   const completeTask = React.useCallback(
     (id: number) => dispatch(thunk.completeTask(id)),
     []
   );
+
   const undoCompletedTask = React.useCallback(
     (id: number) => dispatch(thunk.undoCompletedTask(id)),
     []
@@ -57,6 +63,7 @@ export const useTodos = () => {
     getTodoList,
     addTodo,
     getTodo,
+    editTask,
     deleteTask,
     completeTask,
     undoCompletedTask,

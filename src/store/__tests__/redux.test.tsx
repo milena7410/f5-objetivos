@@ -12,6 +12,7 @@ import {
   CompleteTask,
   CreateTodo,
   DeleteTask,
+  EditTask,
   GetTodoList,
   GetTodoListEmpty,
   NotFound,
@@ -168,6 +169,26 @@ describe("Redux TodoList", () => {
       const buttonDeleteAll = screen.getByText("DELETE ALL");
       fireEvent(buttonDeleteAll, "press");
       expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
+    });
+  });
+
+  it("should edit task", async () => {
+    const newTitle = "TASK EDITED";
+    render(
+      <FakeReduxProvider>
+        <EditTask title={newTitle} id={FIRST_TASK.id} />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+      expect(screen.queryByText(newTitle)).toBeFalsy();
+      const buttonDeleteAll = screen.getByText("EDIT");
+      fireEvent(buttonDeleteAll, "press");
+    });
+    await waitFor(() => {
+      expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
+      expect(screen.getByText(newTitle)).toBeTruthy();
     });
   });
 });
