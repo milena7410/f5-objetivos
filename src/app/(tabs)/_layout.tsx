@@ -50,12 +50,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="completed"
+        name="uncompleted"
         options={{
-          title: "Feitas",
+          title: "A fazer",
           tabBarIcon: ({ size, focused }) => (
             <Atoms.Icons
-              name="check-square"
+              name="square"
               type="feather"
               size={size}
               className={getIconColor(focused)}
@@ -64,12 +64,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="uncompleted"
+        name="completed"
         options={{
-          title: "A fazer",
+          title: "Feitas",
           tabBarIcon: ({ size, focused }) => (
             <Atoms.Icons
-              name="square"
+              name="check-square"
               type="feather"
               size={size}
               className={getIconColor(focused)}
