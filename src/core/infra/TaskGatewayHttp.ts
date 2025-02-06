@@ -40,7 +40,8 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
   };
 
   const deleteAllTasks = async () => {
-    return await httpClient.delete<Task>(`/todos/all`);
+    await httpClient.delete(`/todos/all`);
+    return [];
   };
 
   return {

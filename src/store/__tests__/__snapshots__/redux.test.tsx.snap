@@ -10,6 +10,48 @@ exports[`Redux TodoList should render a list of todos correctly 1`] = `
 <View
   className=" bg-white dark:bg-black "
 >
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    className=" rounded-full self-center h-14 w-40 ""
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
+    >
+      <Text
+        className=" font-urbanist font-bold text-white dark:text-black"
+      >
+        DELETE ALL
+      </Text>
+    </View>
+  </View>
   <Text>
     temporibus atque distinctio omnis eius impedit tempore molestias pariatur
   </Text>

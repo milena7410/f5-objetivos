@@ -80,3 +80,11 @@ export const deleteTask = thunk(
     return id;
   }
 );
+
+export const deleteAllTasks = thunk(
+  "@todos/deleteAllTasks",
+  async (_, { extra }) => {
+    const { taskGateway } = extra;
+    return await useCases.deleteAllTasks(taskGateway);
+  }
+);

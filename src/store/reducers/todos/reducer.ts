@@ -57,15 +57,6 @@ const todoSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(thunk.getTasks.fulfilled, (state, actions) => {
-      state.state = "success";
-      state.error = "";
-      // bypass
-      if (state.isFirstEntry) {
-        state.isFirstEntry = false;
-        fillCompletedAndUncompletedTasks(state, actions.payload);
-      }
-    });
     builder.addCase(thunk.createTask.fulfilled, (state, actions) => {
       state.list = [actions.payload, ...state.list];
       fillCompletedAndUncompletedTasks(state, state.list);
@@ -95,12 +86,25 @@ const todoSlice = createSlice({
       }
     );
     builder.addMatcher(
+      isAnyOf(thunk.getTasks.fulfilled, thunk.deleteAllTasks.fulfilled),
+      (state, actions) => {
+        state.state = "success";
+        state.error = "";
+        // bypass
+        if (state.isFirstEntry || actions.type !== "@todos/deleteAllTasks") {
+          state.isFirstEntry = false;
+          fillCompletedAndUncompletedTasks(state, actions.payload);
+        }
+      }
+    );
+    builder.addMatcher(
       isAnyOf(
         thunk.undoCompletedTask.pending,
         thunk.completeTask.pending,
         thunk.getTasks.pending,
         thunk.createTask.pending,
-        thunk.deleteTask.pending
+        thunk.deleteTask.pending,
+        thunk.deleteAllTasks.pending
       ),
       (state) => {
         state.state = "pending";
@@ -113,7 +117,8 @@ const todoSlice = createSlice({
         thunk.completeTask.rejected,
         thunk.getTasks.rejected,
         thunk.createTask.rejected,
-        thunk.deleteTask.rejected
+        thunk.deleteTask.rejected,
+        thunk.deleteAllTasks.rejected
       ),
       (state, actions) => {
         state.state = "error";

@@ -1,5 +1,10 @@
 import * as React from "react";
-import { render, screen, waitFor } from "@testing-library/react-native";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react-native";
 
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
 import { TODO_LIST_MOCK } from "~/core/infra/TaskGatewayInMemory";
@@ -21,11 +26,6 @@ describe("Redux TodoList", () => {
       </FakeReduxProvider>
     );
     await waitFor(() => {
-      expect(
-        screen.getByText(
-          "temporibus atque distinctio omnis eius impedit tempore molestias pariatur"
-        )
-      ).toBeTruthy();
       expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
       expect(screen.toJSON()).toMatchSnapshot();
     });
@@ -152,6 +152,22 @@ describe("Redux TodoList", () => {
 
     await waitFor(() => {
       expect(screen.getAllByText("not found").length).toBe(2);
+    });
+  });
+
+  it("should delete all tasks", async () => {
+    render(
+      <FakeReduxProvider>
+        <GetTodoList />
+      </FakeReduxProvider>
+    );
+    await waitFor(() => {
+      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+    });
+    await waitFor(() => {
+      const buttonDeleteAll = screen.getByText("DELETE ALL");
+      fireEvent(buttonDeleteAll, "press");
+      expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
     });
   });
 });

@@ -4,7 +4,7 @@ import * as Atoms from "../atoms";
 import * as Templates from "../templates";
 import { ModalHeader } from "./ModalHeader";
 
-type ConfirmModalProps = {
+export type ConfirmModalProps = {
   modalTitle: string;
   confirmButtonVariant?: keyof Atoms.Variant;
   confirmButtonTitle: string;
@@ -29,25 +29,23 @@ const ConfirmModal = React.forwardRef<
       onCancel,
     },
     ref
-  ) => {
-    return (
-      <Templates.ThemedModal ref={ref}>
-        <ModalHeader title={modalTitle} />
-        <Atoms.ThemedView className="flex-row gap-4 justify-center">
-          <Atoms.ThemedButton
-            variant={confirmButtonVariant}
-            onPress={onConfirm}
-            title={confirmButtonTitle}
-          />
-          <Atoms.ThemedButton
-            variant={cancelButtonVariant}
-            onPress={onCancel}
-            title={cancelButtonTitle}
-          />
-        </Atoms.ThemedView>
-      </Templates.ThemedModal>
-    );
-  }
+  ) => (
+    <Templates.ThemedModal onClose={onCancel} ref={ref}>
+      <ModalHeader title={modalTitle} />
+      <Atoms.ThemedView className="flex-row gap-4 justify-center">
+        <Atoms.ThemedButton
+          variant={confirmButtonVariant}
+          onPress={onConfirm}
+          title={confirmButtonTitle}
+        />
+        <Atoms.ThemedButton
+          variant={cancelButtonVariant}
+          onPress={onCancel}
+          title={cancelButtonTitle}
+        />
+      </Atoms.ThemedView>
+    </Templates.ThemedModal>
+  )
 );
 
 export { ConfirmModal };

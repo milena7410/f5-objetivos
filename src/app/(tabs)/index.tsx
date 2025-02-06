@@ -35,7 +35,11 @@ const App = () => {
           }
           isEmpty={!length}
         />
-        <Organism.DraggableList list={list} setList={handleSetList} />
+        <Organism.DraggableList
+          showDeleteAll
+          list={list}
+          setList={handleSetList}
+        />
       </Atoms.ThemedView>
       <Organism.TaskModal />
       <Organism.ChangeThemePicker />

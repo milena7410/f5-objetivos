@@ -35,6 +35,11 @@ export const useTodos = () => {
     []
   );
 
+  const deleteAllTasks = React.useCallback(
+    () => dispatch(thunk.deleteAllTasks()),
+    []
+  );
+
   const selectTask = React.useCallback(
     (id: number) => dispatch(actions.selectTask(id)),
     []
@@ -55,5 +60,6 @@ export const useTodos = () => {
     deleteTask,
     completeTask,
     undoCompletedTask,
+    deleteAllTasks,
   };
 };

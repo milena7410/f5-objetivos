@@ -7,5 +7,5 @@ export interface TaskGateway {
   completeTask(task: Task): Promise<Task>;
   undoCompletedTask(task: Task): Promise<Task>;
   deleteTask(id: number): Promise<void>;
-  deleteAllTasks: VoidFunction;
+  deleteAllTasks(): Promise<any[]>;
 }

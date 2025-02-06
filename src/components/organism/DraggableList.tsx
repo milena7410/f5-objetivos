@@ -34,14 +34,21 @@ const Separator = () => {
 type DraggableListProps = {
   list: Task[];
   setList: (list: Task[]) => void;
+  showDeleteAll?: boolean;
 };
-const DraggableList = ({ list, setList }: DraggableListProps) => {
+const DraggableList = ({
+  list,
+  setList,
+  showDeleteAll,
+}: DraggableListProps) => {
   return (
     <DraggableFlatList
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={Molecules.EmptyList}
       contentContainerClassName="mt-4 ios:pb-safe-offset-40 pb-safe-offset-32"
-      ListHeaderComponent={Molecules.DraggableListHeader}
+      ListHeaderComponent={() => (
+        <Molecules.DraggableListHeader showDeleteAll={showDeleteAll} />
+      )}
       data={list}
       onDragEnd={({ data }) => setList(data)}
       keyExtractor={(item) => item.id.toString()}
