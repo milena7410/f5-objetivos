@@ -45,7 +45,7 @@ const DraggableList = ({
     <DraggableFlatList
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={Molecules.EmptyList}
-      contentContainerClassName="mt-4 ios:pb-safe-offset-40 pb-safe-offset-32"
+      contentContainerClassName="mt-4 ios:pb-safe-offset-56 pb-safe-offset-40"
       ListHeaderComponent={() => (
         <Molecules.DraggableListHeader showDeleteAll={showDeleteAll} />
       )}

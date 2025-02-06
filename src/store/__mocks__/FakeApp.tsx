@@ -1,16 +1,9 @@
 import * as React from "react";
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { Text } from "react-native";
 
 import * as Atoms from "~/components/atoms";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { useThemeContext } from "~/contexts/ThemeContext";
-import { Task } from "~/core/domain/Task";
-import { editTask } from "~/core/application/use-cases";
 
 export const GetTodoListEmpty = () => {
   const { todos } = useTodos();
@@ -120,7 +113,6 @@ export const EditTask = ({ id, title }: { id: number; title: string }) => {
     getTodoList();
   }, []);
 
-  const { colorScheme } = useThemeContext();
   const task = todos.list.find((task) => task.id === id);
 
   if (!task) {

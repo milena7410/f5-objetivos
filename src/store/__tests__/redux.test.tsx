@@ -7,7 +7,10 @@ import {
 } from "@testing-library/react-native";
 
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
-import { TODO_LIST_MOCK } from "~/core/infra/TaskGatewayInMemory";
+import {
+  TaskGatewayInMemory,
+  TODO_LIST_MOCK,
+} from "~/core/infra/TaskGatewayInMemory";
 import {
   CompleteTask,
   CreateTodo,
@@ -17,9 +20,15 @@ import {
   GetTodoListEmpty,
   NotFound,
 } from "../__mocks__/FakeApp";
+import * as tasksGatewayHttp from "~/core/infra/TaskGatewayHttp";
 
 describe("Redux TodoList", () => {
-  const [FIRST_TASK, SECOND_TASK_COMPLETED] = TODO_LIST_MOCK;
+  const [COMPLETED_TASK, UNCOMPLETED_TASK] = TODO_LIST_MOCK;
+  beforeAll(() => {
+    jest
+      .spyOn(tasksGatewayHttp, "tasksGatewayHttp")
+      .mockImplementation(TaskGatewayInMemory);
+  });
   it("should render a list of todos correctly", async () => {
     render(
       <FakeReduxProvider>
@@ -27,7 +36,7 @@ describe("Redux TodoList", () => {
       </FakeReduxProvider>
     );
     await waitFor(() => {
-      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+      expect(screen.getByText(UNCOMPLETED_TASK.title)).toBeTruthy();
       expect(screen.toJSON()).toMatchSnapshot();
     });
   });
@@ -71,7 +80,7 @@ describe("Redux TodoList", () => {
       </FakeReduxProvider>
     );
     await waitFor(() => {
-      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+      expect(screen.getByText(UNCOMPLETED_TASK.title)).toBeTruthy();
       expect(screen.getByText("not found")).toBeTruthy();
     });
   });
@@ -79,12 +88,12 @@ describe("Redux TodoList", () => {
   it("should delete task", async () => {
     render(
       <FakeReduxProvider>
-        <DeleteTask id={FIRST_TASK.id} />
+        <DeleteTask id={UNCOMPLETED_TASK.id} />
       </FakeReduxProvider>
     );
 
     await waitFor(() => {
-      expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
+      expect(screen.queryByText(UNCOMPLETED_TASK.title)).toBeFalsy();
       expect(screen.queryByText("not found")).toBeFalsy();
     });
   });
@@ -92,7 +101,7 @@ describe("Redux TodoList", () => {
   it("should complete task", async () => {
     render(
       <FakeReduxProvider>
-        <CompleteTask method="completeTask" id={FIRST_TASK.id} />
+        <CompleteTask method="completeTask" id={UNCOMPLETED_TASK.id} />
       </FakeReduxProvider>
     );
 
@@ -105,7 +114,7 @@ describe("Redux TodoList", () => {
   it("should throw error if try complete a completed task", async () => {
     render(
       <FakeReduxProvider>
-        <CompleteTask method="completeTask" id={SECOND_TASK_COMPLETED.id} />
+        <CompleteTask method="completeTask" id={COMPLETED_TASK.id} />
       </FakeReduxProvider>
     );
 
@@ -118,10 +127,7 @@ describe("Redux TodoList", () => {
   it("should undo completed task", async () => {
     render(
       <FakeReduxProvider>
-        <CompleteTask
-          method="undoCompletedTask"
-          id={SECOND_TASK_COMPLETED.id}
-        />
+        <CompleteTask method="undoCompletedTask" id={COMPLETED_TASK.id} />
       </FakeReduxProvider>
     );
 
@@ -134,7 +140,7 @@ describe("Redux TodoList", () => {
   it("should throw error when it tries complete a completed task", async () => {
     render(
       <FakeReduxProvider>
-        <CompleteTask method="undoCompletedTask" id={FIRST_TASK.id} />
+        <CompleteTask method="undoCompletedTask" id={UNCOMPLETED_TASK.id} />
       </FakeReduxProvider>
     );
 
@@ -163,12 +169,12 @@ describe("Redux TodoList", () => {
       </FakeReduxProvider>
     );
     await waitFor(() => {
-      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+      expect(screen.getByText(UNCOMPLETED_TASK.title)).toBeTruthy();
     });
     await waitFor(() => {
       const buttonDeleteAll = screen.getByText("DELETE ALL");
       fireEvent(buttonDeleteAll, "press");
-      expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
+      expect(screen.queryByText(UNCOMPLETED_TASK.title)).toBeFalsy();
     });
   });
 
@@ -176,18 +182,18 @@ describe("Redux TodoList", () => {
     const newTitle = "TASK EDITED";
     render(
       <FakeReduxProvider>
-        <EditTask title={newTitle} id={FIRST_TASK.id} />
+        <EditTask title={newTitle} id={UNCOMPLETED_TASK.id} />
       </FakeReduxProvider>
     );
 
     await waitFor(() => {
-      expect(screen.getByText(FIRST_TASK.title)).toBeTruthy();
+      expect(screen.getByText(UNCOMPLETED_TASK.title)).toBeTruthy();
       expect(screen.queryByText(newTitle)).toBeFalsy();
       const buttonDeleteAll = screen.getByText("EDIT");
       fireEvent(buttonDeleteAll, "press");
     });
     await waitFor(() => {
-      expect(screen.queryByText(FIRST_TASK.title)).toBeFalsy();
+      expect(screen.queryByText(UNCOMPLETED_TASK.title)).toBeFalsy();
       expect(screen.getByText(newTitle)).toBeTruthy();
     });
   });

@@ -7,13 +7,13 @@ export const TODO_LIST_MOCK = [
     id: 191,
     title:
       "temporibus atque distinctio omnis eius impedit tempore molestias pariatur",
-    completed: false,
+    completed: true,
   },
   {
     userId: 10,
     id: 192,
     title: "ut quas possimus exercitationem sint voluptates",
-    completed: true,
+    completed: false,
   },
   {
     userId: 10,
@@ -36,8 +36,7 @@ export const TODO_LIST_MOCK = [
   {
     userId: 10,
     id: 196,
-    title:
-      "consequuntur aut ut fugit similique dignissimos quo nobis earum saepe quis eius est sint explicabo numquam repellendus a magnam ",
+    title: "consequuntur aut ut fugit similique",
     completed: true,
   },
   {

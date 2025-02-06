@@ -2,6 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as useCases from "~/core/application/use-cases/";
 
 import type { Task, TaskDTO } from "~/core/domain/Task";
+import { api } from "~/core/infra/adapters/httpClient";
+import { tasksGatewayHttp } from "~/core/infra/TaskGatewayHttp";
 import { TaskGateway } from "~/core/infra/TaskGateway";
 import { RootState } from "~/store";
 
@@ -31,8 +33,7 @@ export const getTasks = thunk(
     if (!isFirstEntry) {
       return [];
     }
-    const { taskGateway } = extra!;
-    const list = useCases.getTodoList(taskGateway);
+    const list = useCases.getTodoList(tasksGatewayHttp(api));
     return list;
   }
 );

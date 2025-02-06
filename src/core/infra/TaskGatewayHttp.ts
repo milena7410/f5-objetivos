@@ -5,7 +5,7 @@ import { TaskGateway } from "./TaskGateway";
 export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
   const getTasks = async () => {
     const todoList = await httpClient.get<TaskDTO[]>("/todos");
-    const tasks = todoList.map((task) => taskBuilder(task));
+    const tasks = todoList.map((task) => taskBuilder(task)).slice(190, 202);
     return tasks;
   };
 
