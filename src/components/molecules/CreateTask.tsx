@@ -39,7 +39,7 @@ const CreateTask = ({ task, handleTask, handleCancel }: CreateTaskProps) => {
         <Atoms.ThemedButton
           variant="secondary"
           onPress={handleCancel}
-          title="Cancelar"
+          title="Sair"
         />
       </Atoms.ThemedView>
     </Atoms.ThemedView>

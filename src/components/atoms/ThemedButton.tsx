@@ -72,7 +72,7 @@ const ThemedButton = ({
         className={`${className}  ${variantButtonStyle[disabledProp][variant]} items-center justify-center rounded-full flex-1 self-stretch`}
       >
         <Text
-          className={`${textClassname} font-urbanist font-bold ${textStyle[disabledProp][variant]}`}
+          className={`${textClassname} font-urbanist-bold ${textStyle[disabledProp][variant]}`}
         >
           {title}
         </Text>

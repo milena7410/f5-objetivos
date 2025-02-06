@@ -8,8 +8,7 @@ export default (reducers: typeof rootReducer) => {
     {
       key: "shx-todo",
       storage: AsyncStorage,
-      whitelist: [],
-      // ["todos"],
+      whitelist: ["todos"],
     },
     reducers
   );

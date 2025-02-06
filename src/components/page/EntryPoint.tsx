@@ -25,7 +25,9 @@ configureReanimatedLogger({
 const EntryPoint = () => {
   const { isLoaded, colorScheme } = useThemeContext();
   const { isLoaded: hasLoadedFont } = useLoadFont();
-  useSplashScreen(isLoaded && hasLoadedFont);
+  if (!useSplashScreen(isLoaded && hasLoadedFont)) {
+    return null;
+  }
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>

@@ -13,7 +13,7 @@ const Header = () => {
           type="materialIcons"
           name="check-box"
         />
-        <Atoms.ThemedText fontStyle="bold" className="text-4xl font-bold">
+        <Atoms.ThemedText fontStyle="bold" className="text-4xl">
           ToDo List SHX
         </Atoms.ThemedText>
       </Atoms.ThemedView>

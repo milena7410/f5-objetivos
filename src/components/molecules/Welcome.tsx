@@ -12,7 +12,7 @@ const Welcome = ({ isEmpty, title, subtitle, emptySubtitle }: WelcomeProps) => {
   const [openModalCreate, setOpenModalCreate] = useState(false);
   return (
     <Atoms.ThemedView className=" p-4 gap-4">
-      <Atoms.ThemedText fontStyle="bold" className="text-2xl font-bold">
+      <Atoms.ThemedText fontStyle="bold" className="text-2xl">
         {title}
       </Atoms.ThemedText>
       <Atoms.ThemedView className="gap-2 flex-row items-center">

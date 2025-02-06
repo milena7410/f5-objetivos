@@ -20,11 +20,7 @@ const TaskModalFooter = ({
       }}
       title="Remover"
     />
-    <Atoms.ThemedButton
-      variant="secondary"
-      onPress={onCancel}
-      title="Cancelar"
-    />
+    <Atoms.ThemedButton variant="secondary" onPress={onCancel} title="Sair" />
   </Atoms.ThemedView>
 );
 
