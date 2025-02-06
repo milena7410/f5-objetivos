@@ -23,6 +23,11 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     await httpClient.delete<TaskDTO>(`/todos/${id}`);
   };
 
+  const editTask = async (task: Task) => {
+    const updatedTask = await httpClient.put<Task>(`/todos/${task.id}`, task);
+    return taskBuilder(updatedTask);
+  };
+
   const completeTask = async (task: Task) => {
     const updatedTask = await httpClient.put<Task>(
       `/todos/${task.id}/complete`,
@@ -48,6 +53,7 @@ export function tasksGatewayHttp(httpClient: HttpClient): TaskGateway {
     getTasks,
     createTask,
     getTask,
+    editTask,
     deleteTask,
     completeTask,
     undoCompletedTask,

@@ -6,6 +6,7 @@ export interface TaskGateway {
   createTask(todo: TaskDTO): Promise<Task>;
   completeTask(task: Task): Promise<Task>;
   undoCompletedTask(task: Task): Promise<Task>;
+  editTask(task: Task): Promise<Task>;
   deleteTask(id: number): Promise<void>;
   deleteAllTasks(): Promise<any[]>;
 }

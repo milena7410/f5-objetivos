@@ -84,6 +84,12 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     return taskBuilder(task);
   };
 
+  const editTask = async (task: Task) => {
+    const index = TODO_LIST.findIndex((t) => t.id === task.id);
+    TODO_LIST.splice(index, 0, task);
+    return TODO_LIST[index];
+  };
+
   const deleteTask = async (id: number) => {
     const taskIndex = TODO_LIST.findIndex((t) => t.id === id);
     if (taskIndex < 0) {
@@ -123,6 +129,7 @@ export const TaskGatewayInMemory = (): TaskGateway => {
     getTasks,
     createTask,
     getTask,
+    editTask,
     deleteTask,
     completeTask,
     undoCompletedTask,

@@ -106,4 +106,13 @@ describe("Todo Gateway", () => {
     const all = await useCases.getTodoList(taskGateway);
     expect(all.length).toBe(0);
   });
+
+  it("should edit task", async () => {
+    const title = "NEW TASK";
+    let task = await useCases.getTask(taskGateway, FIRST_TASK.id);
+    expect(task.title).not.toBe(title);
+    await useCases.editTask(taskGateway, { ...task, title });
+    task = await useCases.getTask(taskGateway, FIRST_TASK.id);
+    expect(task.title).toBe(title);
+  });
 });
