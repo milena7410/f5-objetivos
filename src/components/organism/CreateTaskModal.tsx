@@ -1,6 +1,6 @@
 import * as React from "react";
+import { Toast } from "toastify-react-native";
 
-import * as Atoms from "~/components/atoms";
 import * as Molecules from "~/components/molecules";
 import * as Templates from "~/components/templates";
 import { Task } from "~/core/domain/Task";
@@ -12,7 +12,7 @@ type CreateTaskModalProps = {
 };
 const CreateTaskModal = ({ isEditing, setIsEditing }: CreateTaskModalProps) => {
   const modalRef = React.useRef<Templates.BottomSheetMethods>(null);
-  const { addTodo, todos } = useTodos();
+  const { addTodo, editTask, todos } = useTodos();
 
   React.useEffect(() => {
     if (isEditing) {
@@ -22,12 +22,17 @@ const CreateTaskModal = ({ isEditing, setIsEditing }: CreateTaskModalProps) => {
 
   const handleCreateTask = (task: Partial<Task>) => {
     if (todos.selectedTask?.id) {
-      handleClose();
-      return;
+      return editTask(task as Task)
+        .unwrap()
+        .finally(() => {
+          Toast.success("Tarefa editada");
+          handleClose();
+        });
     }
     addTodo({ title: task.title!, userId: 10 })
       .unwrap()
       .finally(() => {
+        Toast.success("Tarefa criada");
         handleClose();
       });
   };

@@ -1,9 +1,7 @@
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import * as React from "react";
-import { TextInput } from "react-native";
 
 import * as Atoms from "~/components/atoms";
-import * as Molecules from "~/components/molecules";
 import { Task } from "~/core/domain/Task";
 
 type CreateTaskProps = {
@@ -33,7 +31,11 @@ const CreateTask = ({ task, handleTask, handleCancel }: CreateTaskProps) => {
         onSubmitEditing={send}
       />
       <Atoms.ThemedView className="flex-row gap-4 justify-center">
-        <Atoms.ThemedButton onPress={send} title={title} />
+        <Atoms.ThemedButton
+          disabled={!taskTitle || taskTitle === task?.title}
+          onPress={send}
+          title={title}
+        />
         <Atoms.ThemedButton
           variant="secondary"
           onPress={handleCancel}

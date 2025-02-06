@@ -64,8 +64,10 @@ const todoSlice = createSlice({
       state.error = "";
     });
     builder.addCase(thunk.editTask.fulfilled, (state, actions) => {
-      const index = state.list.findIndex(({ id }) => id === actions.payload.id);
-      state.list.splice(index, 0, actions.payload);
+      const task = actions.payload;
+      const index = state.list.findIndex(({ id }) => id === task.id);
+      state.list.splice(index, 1, task);
+      state.selectedTask = task;
       fillCompletedAndUncompletedTasks(state, state.list);
       state.state = "success";
       state.error = "";
