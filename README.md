@@ -5,8 +5,8 @@
 - [Sobre](#sobre)
 - [Estrutura](#estrutura-de-pastas-de-src)
 - [Tecnologias](#tecnologias)
+- [Experimente](#experimente)
 - [Instalação](#instalação)
-
 
 ## Sobre
 
@@ -14,14 +14,13 @@ Este projeto foi desenvolvido como teste para vaga de front-end da empresa SHX c
 
 ### Avaliar habilidades fundamentais de um desenvolvedor em React Native, como:
 
-* Expo
-* Typescript
-* Conhecimento de JSX e componentes.
-* Uso de hooks (useState, useEffect, etc.)
-* Gerenciamento de estado simples.
-* Estilização e layout.
-* Integração com APIs externas.
- 
+- Expo
+- Typescript
+- Conhecimento de JSX e componentes.
+- Uso de hooks (useState, useEffect, etc.)
+- Gerenciamento de estado simples.
+- Estilização e layout.
+- Integração com APIs externas.
 
 ### Descrição do Teste:
 
@@ -35,19 +34,22 @@ Criação de um aplicativo simples utilizando expo de lista de tarefas (To-Do Li
 - ✅ Estilização básica: Interface agradável e funcional.
 - ✅ Consumo de API: Integrar com uma API pública como a JSONPlaceholder (https://jsonplaceholder.typicode.com/) para exibir uma lista inicial de tarefas.
 
- ### Extras
+### Extras
+
 #### Core
+
 - ✅ Redux para gerenciamento de estado e persistência do AsyncStorage
 - ✅ Uso de clean arch com injeção de independencia
 - ✅ Criado HttpClient para isolar a implementação do axios
 - ✅ Testes unitários no core da aplicação e redux
+
 #### View
+
 - ✅ Lista ordenável com drag and drop
-- ✅ Uso de swippeale dentro da lista
+- ✅ Uso de swipeable dentro da lista
 - ✅ Uso de modais do tipo bottomSheet
 - ✅ Dark Mode
 - ✅ Nativewind para estilização com tailwindcss
- 
 
 ## Estrutura de pastas de SRC
 
@@ -94,26 +96,38 @@ Criação de um aplicativo simples utilizando expo de lista de tarefas (To-Do Li
 
 ## Versão mínima
 
-| Nome    | Versao |
+| Nome    | Versão |
 | ------- | ------ |
 | IOS     | 15.1+  |
 | Android | 6+     |
+
+## Experimente
+
+Você pode instalar o apk do app no seu `Android` baixando no link abaixo
+
+- https://expo.dev/artifacts/eas/wj2dZszGmML4uaGGnQMHj3.apk
+
+![app (online-video-cutter com)](https://github.com/user-attachments/assets/e87fcf6d-1a46-4e0f-b8d0-fb57f8e294f1)
 
 ## Instalação
 
 ### No Desktop
 
 1. Clone o projeto com HTTPS ou SSH
-HTTPS
+   HTTPS
+
 ```bash
 $ git clone https://github.com/oliveiragit/react-native-todo-list.git
 ```
+
 SSH
+
 ```bash
 $ git clone git@github.com:oliveiragit/react-native-todo-list.git
 ```
 
 2. Abra a pasta
+
 ```bash
 $ cd react-native-todo-list
 ```
@@ -148,18 +162,18 @@ Aparecerá no terminal um QR code que deverá ser escaneado através do App `Exp
 
 ### Iniciar o projeto em Simulador IOS ou Emulador android
 
-
 ```bash
 $ npm start
 ```
-Pressione a tecla `i` para abrir o simulador do IOS (iPhone), funciona apenas no MacOS com o `Xcode` instalado, ou pressione a tecla `a` para abrir um Simulador Android, que também só funciona com o `Android Studio`(Windows, Linux ou Mac) pré instalado na máquina .
+
+Pressione a tecla `i` para abrir o simulador do IOS (iPhone), funciona apenas no MacOS com o `Xcode` instalado, ou pressione a tecla `a` para abrir um Simulador Android, que também só funciona com o `Android Studio`(Windows, Linux ou Mac) pré instalado na máquina.
+
+🟡 Atenção ao testar no simulador habilite o teclado dispositivo para digitar em caixa de texto dentro modais. Utilizar o teclado do computador faz o modal fechar.
 
 ### Resolução de problemas:
 
-1. Caso tenha inicializado o projeto sem o .env ou necessitou modifica-lo em algum momento.
+1. Caso tenha iniciado o projeto sem o .env ou necessitou modificá-lo em algum momento.
 
 ```bash
 $ npx expo -c
 ```
-
-
