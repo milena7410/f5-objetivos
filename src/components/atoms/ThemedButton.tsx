@@ -64,7 +64,7 @@ const ThemedButton = ({
   const disabledProp = disabled ? "disabled" : "enabled";
   return (
     <Pressable
-      className={`${buttonClassname} rounded-full self-center h-14 w-40 "`}
+      className={`${buttonClassname} self-center h-14 w-40 "`}
       disabled={disabled}
       {...rest}
     >
@@ -72,7 +72,7 @@ const ThemedButton = ({
         className={`${className}  ${variantButtonStyle[disabledProp][variant]} items-center justify-center rounded-full flex-1 self-stretch`}
       >
         <Text
-          className={`${textClassname} font-urbanist-bold ${textStyle[disabledProp][variant]}`}
+          className={`${textClassname} w-full text-center font-urbanist-bold ${textStyle[disabledProp][variant]}`}
         >
           {title}
         </Text>

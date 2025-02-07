@@ -20,10 +20,6 @@ const ThemedModal = React.forwardRef<BottomSheetMethods, ThemedModalProps>(
     const { background, tint } = useThemeColors();
     const bottomSheetRef = React.useRef<BottomSheet>(null);
 
-    const handleChange = React.useCallback((index: number) => {
-      console.log("ModalChange", index);
-    }, []);
-
     const handleClose = React.useCallback(() => {
       bottomSheetRef.current?.close();
     }, []);
@@ -62,7 +58,6 @@ const ThemedModal = React.forwardRef<BottomSheetMethods, ThemedModalProps>(
           handleIndicatorStyle={{ backgroundColor: tint }}
           backdropComponent={renderBackdrop}
           ref={bottomSheetRef}
-          onChange={handleChange}
         >
           <BottomSheetView
             key={Date.now()}
