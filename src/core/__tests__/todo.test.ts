@@ -11,7 +11,7 @@ describe("Todo Gateway", () => {
   const [COMPLETED_TASK, UNCOMPLETED_TASK] = TODO_LIST_MOCK;
   let taskGateway: TaskGateway;
   beforeEach(() => {
-    taskGateway = TaskGatewayInMemory();
+    taskGateway = TaskGatewayInMemory(true);
   });
 
   it("should get all todos", async () => {

@@ -5,23 +5,13 @@ import * as Organism from "~/components/organism";
 import * as Atoms from "~/components/atoms";
 import { useTodos } from "~/store/reducers/todos/actions";
 import { Task } from "~/core/domain/Task";
+import { useDraggableList } from "~/hooks/useDraggableList";
 
 const Completed = () => {
-  const { todos, getTodoList } = useTodos();
-  const [list, setList] = React.useState(todos.completedList);
-
-  const handleSetList = (todoList: Task[]) => {
-    setList(todoList);
-  };
-
-  React.useEffect(() => {
-    getTodoList();
-  }, []);
-
-  React.useEffect(() => {
-    setList(todos.completedList);
-  }, [todos.completedList]);
-  const { length } = todos.completedList;
+  const { list, handleSetList, todos } = useDraggableList({
+    listType: "completedList",
+  });
+  const { length } = list;
   return (
     <Atoms.ThemedView className="flex-1">
       <Molecules.Welcome

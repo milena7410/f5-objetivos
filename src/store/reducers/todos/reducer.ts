@@ -1,7 +1,10 @@
 import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
+import { REHYDRATE } from "redux-persist";
 
 import { Task } from "~/core/domain/Task";
 import * as thunk from "./thunk";
+import { RootState } from "~/store";
+import { TODO_LIST } from "~/core/infra/TaskGatewayInMemory";
 
 type TodoReducer = {
   state: "idle" | "pending" | "success" | "error";
@@ -12,6 +15,11 @@ type TodoReducer = {
   selectedTask?: Task;
   error?: string;
 };
+
+export interface ActionRehydrate {
+  type: string;
+  payload?: RootState;
+}
 
 const initialState: TodoReducer = {
   isFirstEntry: true,
@@ -109,6 +117,16 @@ const todoSlice = createSlice({
       state.state = "success";
       state.selectedTask = undefined;
       state.error = "";
+    });
+    builder.addCase(REHYDRATE, (state, action) => {
+      const typeAction = action as ActionRehydrate;
+      const currentList = typeAction.payload?.todos.list;
+      if (currentList) {
+        TODO_LIST.length = 0;
+        currentList.forEach((value) => {
+          TODO_LIST.push(value);
+        });
+      }
     });
     builder.addMatcher(
       isAnyOf(thunk.completeTask.fulfilled, thunk.undoCompletedTask.fulfilled),

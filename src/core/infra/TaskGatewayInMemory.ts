@@ -64,8 +64,12 @@ export const TODO_LIST_MOCK = [
     completed: false,
   },
 ];
-export const TaskGatewayInMemory = (): TaskGateway => {
-  let TODO_LIST: Task[] = JSON.parse(JSON.stringify(TODO_LIST_MOCK));
+export let TODO_LIST: Task[] = JSON.parse(JSON.stringify(TODO_LIST_MOCK));
+
+export const TaskGatewayInMemory = (isTest?: boolean): TaskGateway => {
+  if (isTest) {
+    TODO_LIST = JSON.parse(JSON.stringify(TODO_LIST_MOCK));
+  }
 
   const getTasks = async (): Promise<Task[]> => TODO_LIST.map(taskBuilder);
 
