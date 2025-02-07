@@ -21,6 +21,11 @@ export const useTodos = () => {
     []
   );
 
+  const setSortedList = React.useCallback(
+    (tasks: Task[]) => dispatch(actions.setSortedList(tasks)),
+    []
+  );
+
   const editTask = React.useCallback(
     (task: Task) => dispatch(thunk.editTask(task)),
     []
@@ -61,6 +66,7 @@ export const useTodos = () => {
     unSelectTask,
     selectTask,
     getTodoList,
+    setSortedList,
     addTodo,
     getTodo,
     editTask,

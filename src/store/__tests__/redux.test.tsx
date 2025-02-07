@@ -4,6 +4,7 @@ import {
   render,
   screen,
   waitFor,
+  within,
 } from "@testing-library/react-native";
 
 import { FakeReduxProvider } from "../__mocks__/FakeProvider";
@@ -195,6 +196,50 @@ describe("Redux TodoList", () => {
     await waitFor(() => {
       expect(screen.queryByText(UNCOMPLETED_TASK.title)).toBeFalsy();
       expect(screen.getByText(newTitle)).toBeTruthy();
+    });
+  });
+
+  it("should order list", async () => {
+    render(
+      <FakeReduxProvider>
+        <GetTodoList />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      const rows = screen.getAllByTestId("row");
+      expect(within(rows[0]).queryByText(TODO_LIST_MOCK[0].title)).toBeTruthy();
+      expect(within(rows[1]).queryByText(TODO_LIST_MOCK[1].title)).toBeTruthy();
+      const sortList = screen.getByText("SET_LIST");
+      fireEvent(sortList, "press");
+    });
+    await waitFor(() => {
+      const rows = screen.getAllByTestId("row");
+      expect(within(rows[1]).queryByText(TODO_LIST_MOCK[0].title)).toBeTruthy();
+      expect(within(rows[0]).queryByText(TODO_LIST_MOCK[1].title)).toBeTruthy();
+    });
+  });
+
+  it("should order list by completed and uncompleted", async () => {
+    render(
+      <FakeReduxProvider>
+        <GetTodoList />
+      </FakeReduxProvider>
+    );
+
+    await waitFor(() => {
+      const rows = screen.getAllByTestId("row");
+      expect(within(rows[0]).queryByText(TODO_LIST_MOCK[0].title)).toBeTruthy();
+      expect(within(rows[1]).queryByText(TODO_LIST_MOCK[1].title)).toBeTruthy();
+      expect(within(rows[2]).queryByText(TODO_LIST_MOCK[2].title)).toBeTruthy();
+      const sortList = screen.getByText("SET_COMPLETED");
+      fireEvent(sortList, "press");
+    });
+    await waitFor(() => {
+      const rows = screen.getAllByTestId("row");
+      expect(within(rows[2]).queryByText(TODO_LIST_MOCK[0].title)).toBeTruthy();
+      expect(within(rows[1]).queryByText(TODO_LIST_MOCK[1].title)).toBeTruthy();
+      expect(within(rows[0]).queryByText(TODO_LIST_MOCK[2].title)).toBeTruthy();
     });
   });
 });

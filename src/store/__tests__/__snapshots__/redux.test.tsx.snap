@@ -29,7 +29,7 @@ exports[`Redux TodoList should render a list of todos correctly 1`] = `
       }
     }
     accessible={true}
-    className=" rounded-full self-center h-14 w-40 ""
+    className=" self-center h-14 w-40 ""
     collapsable={false}
     focusable={true}
     onBlur={[Function]}
@@ -46,41 +46,145 @@ exports[`Redux TodoList should render a list of todos correctly 1`] = `
       className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
     >
       <Text
-        className=" font-urbanist-bold text-white dark:text-black"
+        className=" w-full text-center font-urbanist-bold text-white dark:text-black"
       >
         DELETE ALL
       </Text>
     </View>
   </View>
-  <Text>
+  <Text
+    testID="row"
+  >
     temporibus atque distinctio omnis eius impedit tempore molestias pariatur
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     ut quas possimus exercitationem sint voluptates
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     rerum debitis voluptatem qui eveniet tempora distinctio a
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     sed ut vero sit molestiae
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     rerum ex veniam mollitia voluptatibus pariatur
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     consequuntur aut ut fugit similique
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     dignissimos quo nobis earum saepe
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     quis eius est sint explicabo
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     numquam repellendus a magnam
   </Text>
-  <Text>
+  <Text
+    testID="row"
+  >
     ipsam aperiam voluptates qui
   </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    className=" self-center h-14 w-40 ""
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
+    >
+      <Text
+        className=" w-full text-center font-urbanist-bold text-white dark:text-black"
+      >
+        SET_LIST
+      </Text>
+    </View>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    className=" self-center h-14 w-40 ""
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      className="   bg-black dark:bg-white items-center justify-center rounded-full flex-1 self-stretch"
+    >
+      <Text
+        className=" w-full text-center font-urbanist-bold text-white dark:text-black"
+      >
+        SET_COMPLETED
+      </Text>
+    </View>
+  </View>
 </View>
 `;

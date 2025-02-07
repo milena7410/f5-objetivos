@@ -18,7 +18,7 @@ export const GetTodoListEmpty = () => {
 };
 
 export const GetTodoList = () => {
-  const { getTodoList, todos, deleteAllTasks } = useTodos();
+  const { getTodoList, todos, deleteAllTasks, setSortedList } = useTodos();
   React.useEffect(() => {
     getTodoList();
   }, []);
@@ -27,8 +27,26 @@ export const GetTodoList = () => {
     <Atoms.ThemedView>
       <Atoms.ThemedButton title="DELETE ALL" onPress={deleteAllTasks} />
       {todos.list.map((todo) => (
-        <Text key={todo.id}>{todo.title}</Text>
+        <Text testID="row" key={todo.id}>
+          {todo.title}
+        </Text>
       ))}
+      <Atoms.ThemedButton
+        title="SET_LIST"
+        onPress={() => {
+          const [FIRST, SECOND] = todos.list;
+          const newList = [SECOND, FIRST, ...todos.list.slice(2)];
+          setSortedList(newList);
+        }}
+      />
+      <Atoms.ThemedButton
+        title="SET_COMPLETED"
+        onPress={() => {
+          const [FIRST, SECOND] = todos.completedList;
+          const newList = [SECOND, FIRST, ...todos.completedList.slice(3)];
+          setSortedList(newList);
+        }}
+      />
     </Atoms.ThemedView>
   );
 };

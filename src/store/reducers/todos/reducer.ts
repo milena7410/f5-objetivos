@@ -45,6 +45,35 @@ const todoSlice = createSlice({
   name: "@todos",
   initialState,
   reducers: {
+    setSortedList: (state, action: PayloadAction<Task[]>) => {
+      const newList = action.payload;
+
+      if (newList.length === state.list.length) {
+        fillCompletedAndUncompletedTasks(state, newList);
+        return;
+      }
+
+      const sortedTask = state.list.reduce<Task[]>((acc, task) => {
+        const taskShift = newList[0];
+        if (!taskShift) {
+          acc.push(task);
+          return acc;
+        }
+        if (taskShift.completed && task.completed) {
+          acc.push(taskShift);
+          newList.shift();
+          return acc;
+        }
+        if (!taskShift.completed && !task.completed) {
+          acc.push(taskShift);
+          newList.shift();
+          return acc;
+        }
+        acc.push(task);
+        return acc;
+      }, []);
+      fillCompletedAndUncompletedTasks(state, sortedTask);
+    },
     selectTask: (state, action: PayloadAction<number>) => {
       const id = action.payload;
       state.selectedTask = id
