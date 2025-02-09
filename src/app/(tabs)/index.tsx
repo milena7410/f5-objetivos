@@ -14,7 +14,7 @@ const App = () => {
     <>
       <Atoms.ThemedView className="flex-1">
         <Molecules.Welcome
-          title="Bem-vindo!"
+          title="Olá Milena!"
           subtitle={`Você tem ${length} tarefas a fazer`}
           emptySubtitle={
             todos.list.length

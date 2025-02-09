@@ -14,7 +14,7 @@ const Header = () => {
           name="check-box"
         />
         <Atoms.ThemedText fontStyle="bold" className="text-4xl">
-          ToDo List SHX
+          F5 Objetivos
         </Atoms.ThemedText>
       </Atoms.ThemedView>
       <Pressable onPress={() => setOpenPicker(!openPicker)}>
